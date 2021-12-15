@@ -1,3 +1,4 @@
 *.ytd filter=lfs diff=lfs merge=lfs -text
 *.ytf filter=lfs diff=lfs merge=lfs -text
 *.ymap filter=lfs diff=lfs merge=lfs -text
+*.ydd filter=lfs diff=lfs merge=lfs -text
