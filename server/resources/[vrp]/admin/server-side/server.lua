@@ -135,7 +135,7 @@ end)
 RegisterCommand("plate",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if user_id then
-		if vRP.hasPermission(user_id,"Owner") and args[1] and args[2] and args[3] then
+		if vRP.hasPermission(user_id,"Admin") and args[1] and args[2] and args[3] then
 			vRP.execute("vRP/update_plate_vehicle",{ user_id = parseInt(args[1]), vehicle = args[2], plate = args[3] })
 		end
 	end
@@ -146,7 +146,7 @@ end)
 RegisterCommand("addcar",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if user_id then
-		if vRP.hasPermission(user_id,"Owner") and args[1] and args[2] then
+		if vRP.hasPermission(user_id,"Admin") and args[1] and args[2] then
 			vRP.execute("vRP/add_vehicle",{ user_id = parseInt(args[1]), vehicle = args[2], plate = vRP.generatePlateNumber(), phone = vRP.getPhone(args[1]), work = tostring(false) })
 			TriggerClientEvent("Notify",args[1],"amarelo","Recebido o veículo <b>"..args[2].."</b> em sua garagem.",5000)
 			TriggerClientEvent("Notify",source,"amarelo","Adicionado o veiculo <b>"..args[2].."</b> na garagem de ID <b>"..args[1].."</b>.",10000)
@@ -240,7 +240,7 @@ end)
 RegisterCommand("gems",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if user_id then
-		if vRP.hasPermission(user_id,"Owner") and parseInt(args[1]) > 0 and parseInt(args[2]) > 0 then
+		if vRP.hasPermission(user_id,"Admin") and parseInt(args[1]) > 0 and parseInt(args[2]) > 0 then
 			local identity = vRP.getUserIdentity(parseInt(args[1]))
 			if identity then
 				vRP.addGmsId(args[1],args[2])
@@ -301,7 +301,7 @@ end)
 RegisterCommand("group",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if user_id then
-		if vRP.hasPermission(user_id,"Owner") then
+		if vRP.hasPermission(user_id,"Admin") then
 			if not vRP.hasPermission(parseInt(args[1]),tostring(args[2])) then
 				vRP.insertPermission(parseInt(args[1]),tostring(args[2]))
 				vRP.execute("vRP/add_group",{ user_id = parseInt(args[1]), permiss = tostring(args[2]) })
@@ -315,7 +315,7 @@ end)
 RegisterCommand("ungroup",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if user_id then
-		if vRP.hasPermission(user_id,"Owner") then
+		if vRP.hasPermission(user_id,"Admin") then
 			if vRP.hasPermission(parseInt(args[1]),tostring(args[2])) then
 				vRP.removePermission(parseInt(args[1]),tostring(args[2]))
 				vRP.execute("vRP/del_group",{ user_id = parseInt(args[1]), permiss = tostring(args[2]) })
@@ -393,7 +393,7 @@ end)
 RegisterCommand("delnpcs",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if user_id then
-		if vRP.hasPermission(user_id,"Owner") then
+		if vRP.hasPermission(user_id,"Admin") then
 			vCLIENT.deleteNpcs(source)
 			TriggerClientEvent("Notify",source,"amarelo","NPCs próximos deletados.",3000)
 		end
@@ -405,7 +405,7 @@ end)
 RegisterCommand("tuning",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if user_id then
-		if vRP.hasPermission(user_id,"Owner") then
+		if vRP.hasPermission(user_id,"Admin") then
 			TriggerClientEvent("admin:vehicleTuning",source)
 			TriggerClientEvent("Notify",source,"amarelo","Realizado melhorias no veículo.",3000)
 		end
@@ -450,7 +450,7 @@ end)
 RegisterCommand("cleararea",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if user_id then
-		if vRP.hasPermission(user_id,"Owner") then
+		if vRP.hasPermission(user_id,"Admin") then
 			local x,y,z = vRPclient.getPositions(source)
 			TriggerClientEvent("syncarea",-1,x,y,z,100)
 			TriggerClientEvent("Notify",source,"amarelo","Toda área próxima foi limpa.",3000)
@@ -496,7 +496,7 @@ end
 RegisterCommand("announce",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if user_id then
-		if vRP.hasPermission(user_id,"Owner") then
+		if vRP.hasPermission(user_id,"Admin") then
 			local message = vRP.prompt(source,"Mensagem:","")
 			if message == "" then
 				return
@@ -511,7 +511,7 @@ end)
 RegisterCommand("itemall",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if user_id then
-		if vRP.hasPermission(user_id,"Owner") then
+		if vRP.hasPermission(user_id,"Admin") then
 			local users = vRP.getUsers()
 			for k,v in pairs(users) do
 				vRP.giveInventoryItem(parseInt(k),tostring(args[1]),parseInt(args[2]),true)
