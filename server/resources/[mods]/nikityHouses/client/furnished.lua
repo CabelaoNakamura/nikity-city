@@ -12,7 +12,7 @@ function CreateHotelFurnished(spawn)
 	local POIOffsets = {}
 	POIOffsets.exit = json.decode('{"z":2.5,"y":-15.901171875,"x":4.251012802124,"h":2.2633972168}')
 	
-	local building = CreateObject(`playerhouse_hotel`, spawn.x - 0.7,spawn.y-0.4,spawn.z-1.42,false,false,false)
+	local building = CreateObject("playerhouse_hotel", spawn.x - 0.7,spawn.y-0.4,spawn.z-1.42,false,false,false)
 
 	FreezeEntityPosition(building,true)
 	Citizen.Wait(100)
@@ -104,11 +104,11 @@ function CreateApartmentFurnished(spawn)
     while not IsScreenFadedOut() do
         Citizen.Wait(10)
     end
-	RequestModel(`playerhouse_appartment_motel`)
-	while not HasModelLoaded(`playerhouse_appartment_motel`) do
+	RequestModel("playerhouse_appartment_motel")
+	while not HasModelLoaded("playerhouse_appartment_motel") do
 	    Citizen.Wait(3)
 	end
-	local house = CreateObject(`playerhouse_appartment_motel`, spawn.x, spawn.y, spawn.z, false, false, false)
+	local house = CreateObject("playerhouse_appartment_motel", spawn.x, spawn.y, spawn.z, false, false, false)
     FreezeEntityPosition(house, true)
 	table.insert(objects, house)
 
@@ -131,11 +131,11 @@ function CreateMichaelShell(spawn)
     while not IsScreenFadedOut() do
         Citizen.Wait(10)
     end
-	RequestModel(`micheal_shell`)
-	while not HasModelLoaded(`micheal_shell`) do
+	RequestModel("micheal_shell")
+	while not HasModelLoaded("micheal_shell") do
 	    Citizen.Wait(1000)
 	end
-	local house = CreateObject(`micheal_shell`, spawn.x, spawn.y, spawn.z, false, false, false)
+	local house = CreateObject("micheal_shell", spawn.x, spawn.y, spawn.z, false, false, false)
     FreezeEntityPosition(house, true)
 	table.insert(objects, house)
 
@@ -153,7 +153,7 @@ function CreateTrevorsShell(spawn)
     while not IsScreenFadedOut() do
         Citizen.Wait(10)
     end
-	RequestModel(`trevors_shell`)
+	RequestModel("trevors_shell")
 	while not HasModelLoaded(`trevors_shell`) do
 	    Citizen.Wait(1000)
 	end
@@ -179,7 +179,7 @@ function CreateLesterShell(spawn)
 	while not HasModelLoaded(`playerhouse_tier2`) do
 	    Citizen.Wait(1000)
 	end
-	local house = CreateObject(`playerhouse_tier2`, spawn.x, spawn.y, spawn.z, false, false, false)
+	local house = CreateObject("playerhouse_tier2", spawn.x, spawn.y, spawn.z, false, false, false)
     FreezeEntityPosition(house, true)
 	table.insert(objects, house)
 
@@ -197,8 +197,8 @@ function CreateGunshopShell(spawn)
     while not IsScreenFadedOut() do
         Citizen.Wait(10)
     end
-	RequestModel(`gunshop_shell`)
-	while not HasModelLoaded(`gunshop_shell`) do
+	RequestModel("gunshop_shell")
+	while not HasModelLoaded("gunshop_shell") do
 	    Citizen.Wait(1000)
 	end
 	local house = CreateObject(`gunshop_shell`, spawn.x, spawn.y, spawn.z, false, false, false)

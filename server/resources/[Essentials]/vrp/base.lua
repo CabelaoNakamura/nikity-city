@@ -385,3 +385,10 @@ AddEventHandler("vRP:playerSpawn",function(user_id,source)
 		end
 	end
 end)
+
+function vRP.checkDist(pos1, pos2)
+
+	local dist = Vdist2(pos1.x, pos1.y, pos1.z, pos2.x, pos2.y, pos2.z)
+	return dist
+
+end
