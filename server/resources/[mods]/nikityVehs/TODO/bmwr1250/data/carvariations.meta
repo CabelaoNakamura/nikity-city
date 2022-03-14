@@ -12,26 +12,26 @@
             0
           </indices>
 					<liveries>
-						<Item value="true" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="true"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 			</colors>
 			<kits>
 				<Item>1000_trailsamu_modkit</Item>
 			</kits>
-			<windowsWithExposedEdges />
+			<windowsWithExposedEdges/>
 			<plateProbabilities>
-				<Probabilities />
+				<Probabilities/>
 			</plateProbabilities>
-			<lightSettings value="1000" />
-			<sirenSettings value="1" />
+			<lightSettings value="1000"/>
+			<sirenSettings value="1"/>
 		</Item>
 		<Item>
 			<modelName>trail19rt</modelName>
@@ -44,26 +44,26 @@
             0
           </indices>
 					<liveries>
-						<Item value="true" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="true"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 			</colors>
 			<kits>
 				<Item>1001_trail19rt_modkit</Item>
 			</kits>
-			<windowsWithExposedEdges />
+			<windowsWithExposedEdges/>
 			<plateProbabilities>
-				<Probabilities />
+				<Probabilities/>
 			</plateProbabilities>
-			<lightSettings value="1001" />
-			<sirenSettings value="1" />
+			<lightSettings value="1001"/>
+			<sirenSettings value="1"/>
 		</Item>
 		<Item>
 			<modelName>tenere1200</modelName>
@@ -76,43 +76,43 @@
             0
           </indices>
 					<liveries>
-						<Item value="true" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="true"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 			</colors>
 			<kits>
 				<Item>1002_tenere1200_modkit</Item>
 			</kits>
-			<windowsWithExposedEdges />
+			<windowsWithExposedEdges/>
 			<plateProbabilities>
 				<Probabilities>
 					<Item>
 						<Name>Standard White</Name>
-						<Value value="25" />
+						<Value value="25"/>
 					</Item>
 					<Item>
 						<Name>White Plate 2</Name>
-						<Value value="25" />
+						<Value value="25"/>
 					</Item>
 					<Item>
 						<Name>Blue Plate</Name>
-						<Value value="25" />
+						<Value value="25"/>
 					</Item>
 					<Item>
 						<Name>Yellow Plate</Name>
-						<Value value="25" />
+						<Value value="25"/>
 					</Item>
 				</Probabilities>
 			</plateProbabilities>
-			<lightSettings value="1002" />
-			<sirenSettings value="0" />
+			<lightSettings value="1002"/>
+			<sirenSettings value="0"/>
 		</Item>
 		<Item>
 			<modelName>tenere</modelName>
@@ -125,14 +125,14 @@
             156 
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 				<Item>
@@ -143,14 +143,14 @@
             156 
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 				<Item>
@@ -161,14 +161,14 @@
             156 
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 				<Item>
@@ -179,14 +179,14 @@
             156 
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 				<Item>
@@ -197,14 +197,14 @@
             156 
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 				<Item>
@@ -215,14 +215,14 @@
             156 
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 				<Item>
@@ -233,31 +233,31 @@
             156 
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 			</colors>
 			<kits>
 				<Item>1003_tenere_modkit</Item>
 			</kits>
-			<windowsWithExposedEdges />
+			<windowsWithExposedEdges/>
 			<plateProbabilities>
 				<Probabilities>
 					<Item>
 						<Name>Standard White</Name>
-						<Value value="100" />
+						<Value value="100"/>
 					</Item>
 				</Probabilities>
 			</plateProbabilities>
-			<lightSettings value="1003" />
-			<sirenSettings value="0" />
+			<lightSettings value="1003"/>
+			<sirenSettings value="0"/>
 		</Item>
 		<Item>
 			<modelName>palio17</modelName>
@@ -270,26 +270,26 @@
             0
           </indices>
 					<liveries>
-						<Item value="true" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="true"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 			</colors>
 			<kits>
 				<Item>1004_palio17_modkit</Item>
 			</kits>
-			<windowsWithExposedEdges />
+			<windowsWithExposedEdges/>
 			<plateProbabilities>
-				<Probabilities />
+				<Probabilities/>
 			</plateProbabilities>
-			<lightSettings value="1004" />
-			<sirenSettings value="1" />
+			<lightSettings value="1004"/>
+			<sirenSettings value="1"/>
 		</Item>
 		<Item>
 			<modelName>MTA</modelName>
@@ -302,14 +302,14 @@
             0
           </indices>
 					<liveries>
-						<Item value="true" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="true"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 				<Item>
@@ -320,14 +320,14 @@
             0
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="true" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="false"/>
+						<Item value="true"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 				<Item>
@@ -338,14 +338,14 @@
             0
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="true" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="true"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 				<Item>
@@ -356,14 +356,14 @@
             0
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="true" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="true"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 				<Item>
@@ -374,14 +374,14 @@
             0
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="true" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="true"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 				<Item>
@@ -392,14 +392,14 @@
             0
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="true" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="true"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 				<Item>
@@ -410,14 +410,14 @@
             0
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="true" />
-						<Item value="false" />
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="true"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 				<Item>
@@ -428,26 +428,26 @@
             0
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="true" />
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="true"/>
 					</liveries>
 				</Item>
 			</colors>
 			<kits>
 				<Item>1005_MTA_modkit</Item>
 			</kits>
-			<windowsWithExposedEdges />
+			<windowsWithExposedEdges/>
 			<plateProbabilities>
-				<Probabilities />
+				<Probabilities/>
 			</plateProbabilities>
-			<lightSettings value="1005" />
-			<sirenSettings value="7" />
+			<lightSettings value="1005"/>
+			<sirenSettings value="7"/>
 		</Item>
 		<Item>
 			<modelName>hiluxpc</modelName>
@@ -460,26 +460,26 @@
             0
           </indices>
 					<liveries>
-						<Item value="true" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="true"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 			</colors>
 			<kits>
 				<Item>1006_hiluxpc_modkit</Item>
 			</kits>
-			<windowsWithExposedEdges />
+			<windowsWithExposedEdges/>
 			<plateProbabilities>
-				<Probabilities />
+				<Probabilities/>
 			</plateProbabilities>
-			<lightSettings value="1006" />
-			<sirenSettings value="1" />
+			<lightSettings value="1006"/>
+			<sirenSettings value="1"/>
 		</Item>
 		<Item>
 			<modelName>hiluxeb</modelName>
@@ -492,26 +492,26 @@
             0
           </indices>
 					<liveries>
-						<Item value="true" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="true"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 			</colors>
 			<kits>
 				<Item>1007_hiluxeb_modkit</Item>
 			</kits>
-			<windowsWithExposedEdges />
+			<windowsWithExposedEdges/>
 			<plateProbabilities>
-				<Probabilities />
+				<Probabilities/>
 			</plateProbabilities>
-			<lightSettings value="1007" />
-			<sirenSettings value="1" />
+			<lightSettings value="1007"/>
+			<sirenSettings value="1"/>
 		</Item>
 		<Item>
 			<modelName>63lb</modelName>
@@ -524,47 +524,47 @@
             156
           </indices>
 					<liveries>
-						<Item value="true" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="true"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 			</colors>
 			<kits>
 				<Item>1008_63lb_modkit</Item>
 			</kits>
-			<windowsWithExposedEdges />
+			<windowsWithExposedEdges/>
 			<plateProbabilities>
 				<Probabilities>
 					<Item>
 						<Name>Standard White</Name>
-						<Value value="20" />
+						<Value value="20"/>
 					</Item>
 					<Item>
 						<Name>White Plate 2</Name>
-						<Value value="20" />
+						<Value value="20"/>
 					</Item>
 					<Item>
 						<Name>Blue Plate</Name>
-						<Value value="20" />
+						<Value value="20"/>
 					</Item>
 					<Item>
 						<Name>Yellow Plate</Name>
-						<Value value="20" />
+						<Value value="20"/>
 					</Item>
 					<Item>
 						<Name>yankton plate</Name>
-						<Value value="20" />
+						<Value value="20"/>
 					</Item>
 				</Probabilities>
 			</plateProbabilities>
-			<lightSettings value="1008" />
-			<sirenSettings value="0" />
+			<lightSettings value="1008"/>
+			<sirenSettings value="0"/>
 		</Item>
 		<Item>
 			<modelName>fox</modelName>
@@ -579,14 +579,14 @@
 			37
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 				<Item>
@@ -599,14 +599,14 @@
 			37
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 				<Item>
@@ -619,14 +619,14 @@
 			37
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 				<Item>
@@ -639,14 +639,14 @@
 			37
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 				<Item>
@@ -659,14 +659,14 @@
 			37
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 				<Item>
@@ -679,14 +679,14 @@
 			37
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 				<Item>
@@ -699,14 +699,14 @@
 			37
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 				<Item>
@@ -719,14 +719,14 @@
 			37
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 				<Item>
@@ -739,14 +739,14 @@
 			37
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 				<Item>
@@ -759,14 +759,14 @@
 			37
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 				<Item>
@@ -779,14 +779,14 @@
 			37
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 				<Item>
@@ -799,14 +799,14 @@
 			37
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 				<Item>
@@ -819,14 +819,14 @@
 			37
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 				<Item>
@@ -839,14 +839,14 @@
 			37
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 				<Item>
@@ -859,14 +859,14 @@
 			37
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 				<Item>
@@ -879,14 +879,14 @@
 			37
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 				<Item>
@@ -899,14 +899,14 @@
 			37
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 				<Item>
@@ -919,14 +919,14 @@
 			37
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 				<Item>
@@ -939,14 +939,14 @@
 			37
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 				<Item>
@@ -959,14 +959,14 @@
 			37
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 				<Item>
@@ -979,43 +979,43 @@
 			37
           </indices>
 					<liveries>
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 			</colors>
 			<kits>
 				<Item>1009_fox_modkit</Item>
 			</kits>
-			<windowsWithExposedEdges />
+			<windowsWithExposedEdges/>
 			<plateProbabilities>
 				<Probabilities>
 					<Item>
 						<Name>Standard White</Name>
-						<Value value="50" />
+						<Value value="50"/>
 					</Item>
 					<Item>
 						<Name>White Plate 2</Name>
-						<Value value="25" />
+						<Value value="25"/>
 					</Item>
 					<Item>
 						<Name>Blue Plate</Name>
-						<Value value="15" />
+						<Value value="15"/>
 					</Item>
 					<Item>
 						<Name>Yellow Plate</Name>
-						<Value value="10" />
+						<Value value="10"/>
 					</Item>
 				</Probabilities>
 			</plateProbabilities>
-			<lightSettings value="1009" />
-			<sirenSettings value="0" />
+			<lightSettings value="1009"/>
+			<sirenSettings value="0"/>
 		</Item>
 		<Item>
 			<modelName>ambiental</modelName>
@@ -1028,26 +1028,26 @@
             0
           </indices>
 					<liveries>
-						<Item value="true" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
-						<Item value="false" />
+						<Item value="true"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
+						<Item value="false"/>
 					</liveries>
 				</Item>
 			</colors>
 			<kits>
 				<Item>1010_ambiental_modkit</Item>
 			</kits>
-			<windowsWithExposedEdges />
+			<windowsWithExposedEdges/>
 			<plateProbabilities>
-				<Probabilities />
+				<Probabilities/>
 			</plateProbabilities>
-			<lightSettings value="1010" />
-			<sirenSettings value="1" />
+			<lightSettings value="1010"/>
+			<sirenSettings value="1"/>
 		</Item>
 		<Item>
 			<modelName>r1250</modelName>
@@ -1060,40 +1060,40 @@
             0
           </indices>
 					<liveries>
-						<Item value="true" />
-						<Item value="true" />
-						<Item value="true" />
-						<Item value="true" />
-						<Item value="true" />
+						<Item value="true"/>
+						<Item value="true"/>
+						<Item value="true"/>
+						<Item value="true"/>
+						<Item value="true"/>
 					</liveries>
 				</Item>
 			</colors>
 			<kits>
 				<Item>1011_r1250_modkit</Item>
 			</kits>
-			<windowsWithExposedEdges />
+			<windowsWithExposedEdges/>
 			<plateProbabilities>
 				<Probabilities>
 					<Item>
 						<Name>Standard White</Name>
-						<Value value="25" />
+						<Value value="25"/>
 					</Item>
 					<Item>
 						<Name>White Plate 2</Name>
-						<Value value="50" />
+						<Value value="50"/>
 					</Item>
 					<Item>
 						<Name>Blue Plate</Name>
-						<Value value="10" />
+						<Value value="10"/>
 					</Item>
 					<Item>
 						<Name>Yellow Plate</Name>
-						<Value value="15" />
+						<Value value="15"/>
 					</Item>
 				</Probabilities>
 			</plateProbabilities>
-			<lightSettings value="1011" />
-			<sirenSettings value="0" />
+			<lightSettings value="1011"/>
+			<sirenSettings value="0"/>
 		</Item>
 	</variationData>
 </CVehicleModelInfoVariation>
