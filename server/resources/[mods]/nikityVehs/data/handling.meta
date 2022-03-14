@@ -48718,7 +48718,8 @@
 			</SubHandlingData>
 		</Item>
 	</HandlingData>
-</CHandlingDataMgr><CAIHandlingInfoMgr>
+</CHandlingDataMgr>
+<!-- <CAIHandlingInfoMgr>
 	<AIHandlingInfos>
 		<Item type="CAIHandlingInfo">
 			<Name>SPORTS_CAR</Name>
@@ -51653,4 +51654,4 @@
 			</AICurvePoints>
 		</Item>
 	</AIHandlingInfos>
-</CAIHandlingInfoMgr>
+</CAIHandlingInfoMgr> -->
