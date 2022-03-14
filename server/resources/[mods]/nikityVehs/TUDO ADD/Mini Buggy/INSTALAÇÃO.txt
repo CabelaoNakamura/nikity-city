@@ -1,0 +1,20 @@
+ __   __   __ _    __ _   _ __     ___   _ __     ____  _ __  
+ \ \ / /  / _` |  / _` | | '_ \   / _ \ | '__|   |_  / | '_ \ 
+  \ V /  | (_| | | (_| | | | | | |  __/ | |       / /  | | | |
+   \_/    \__,_|  \__, | |_| |_|  \___| |_|      /___| |_| |_|
+                  |___/                   www.vagnerzn.com.br    
+
+AVISO!
+
+Você pode usar este MOD em qualquer um de seus vídeos,
+mas você deve incluir o seguinte na descrição de seu vídeo:
+
+@vagnerzn
+---------------------------------------------------------------------------
+
+1º Copie a pasta (mini_buggy) dentro da pasta resources no servidor FiveM
+
+2º Adicione (start mini_buggy) no arquivo server.cfg 
+
+---------------------------------------------------------------------------
+
