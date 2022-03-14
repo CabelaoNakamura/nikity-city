@@ -50,8 +50,8 @@ Default variables:
 - `recipeName`, `recipeAuthor`, `recipeVersion`, `recipeDescription`: Populated from the recipe metadata, if available.
 - `dbHost`, `dbUsername`, `dbPassword`, `dbName`, `dbDelete`, `dbConnectionString`: Populated from the database configuration user input, if available.
 - `svLicense`: Required variable, inputed in the deployer step 2. The deployer will automatically replace `{{svLicense}}` in the `server.cfg` at the end of the deployment.
-- `serverEndpoints`: The `endpoint_add_xxxx` for the server. The deployer will set this with the defaults (`0.0.0.0:30120`) or using the appropriate Zap-Hosting configuration.
-- `maxClients`: The number of max clients for the server. The deployer will set this with the default 48 slots or using the appropriate Zap-Hosting configuration.
+- `serverEndpoints`: The `endpoint_add_xxxx` for the server. The deployer will set this with the defaults (`0.0.0.0:30120`) or using the appropriate ZAP-Hosting configuration.
+- `maxClients`: The number of max clients for the server. The deployer will set this with the default 48 slots or using the appropriate ZAP-Hosting configuration.
   
 In the second step of the deployer, the user will be asked to fill some information required to configure his server which will be loaded into context variables.  
 How to set custom variables:
@@ -87,6 +87,7 @@ If the directory structure does not exist, it is created.
 - `ref`: *(optional)* The git reference to be fownloaded. This can be a branch, a tag, or a commit hash. If none is set, the recipe engine will query GitHub's API to get the default branch name (usually `master` or `main`).
 - `subpath`: *(optional)* When specified, copies a subpath of the repository.
 - `dest`: The destination path for the downloaded file.
+> Note: If you have more than 30 of this action, it is recommended to set the ref, otherwise users will may end up getting download errors (401/403 instead of 429) due to the number of times txAdmin calls the GitHub API.
 ```yaml
 # Example with subpath and reference
 - action: download_github
@@ -210,8 +211,8 @@ Replaces a string in the target file or files array based on a search string and
 - action: replace_string
   mode: all_vars
   file: 
-    - ./server.cfg
-    - ./doesntexist/config.json
+    - ./resources/blah.cfg
+    - ./something/config.json
 
 # Replace all variables
 - action: replace_string

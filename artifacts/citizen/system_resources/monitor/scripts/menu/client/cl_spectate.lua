@@ -1,15 +1,20 @@
+-- =============================================
+--  Contains all spectate related logic
+-- =============================================
+if (GetConvar('txAdmin-menuEnabled', 'false') ~= 'true') then
+    return
+end
 -- Last spectate location stored in a vec3
 local lastSpectateLocation
 -- Spectate mode
 local isSpectateEnabled = false
 -- Spectated ped
-local storedTargetPed = nil
+local storedTargetPed
 -- Spectated player's client ID
 local storedTargetPlayerId
 -- Spectated players associated GameTag
-local storedGameTag = nil
+local storedGameTag
 
-RegisterKeyMapping('txAdmin:menu:endSpectate', 'Exit spectate mode', 'keyboard', 'BACK')
 
 RegisterNUICallback('spectatePlayer', function(data, cb)
     TriggerServerEvent('txAdmin:menu:spectatePlayer', tonumber(data.id))
@@ -23,36 +28,46 @@ local function InstructionalButton(controlButton, text)
     EndTextCommandScaleformString()
 end
 
-local function setupScaleform()
-    -- yay, scaleforms
-    local scaleform = RequestScaleformMovie("instructional_buttons")
-    while not HasScaleformMovieLoaded(scaleform) do
-        Wait(1)
-    end
-    PushScaleformMovieFunction(scaleform, "CLEAR_ALL")
-    PopScaleformMovieFunctionVoid()
+local function createScaleformThread()
+    CreateThread(function()
+        -- yay, scaleforms
+        local scaleform = RequestScaleformMovie("instructional_buttons")
+        while not HasScaleformMovieLoaded(scaleform) do
+            Wait(1)
+        end
+        PushScaleformMovieFunction(scaleform, "CLEAR_ALL")
+        PopScaleformMovieFunctionVoid()
 
-    PushScaleformMovieFunction(scaleform, "SET_CLEAR_SPACE")
-    PushScaleformMovieFunctionParameterInt(200)
-    PopScaleformMovieFunctionVoid()
+        PushScaleformMovieFunction(scaleform, "SET_CLEAR_SPACE")
+        PushScaleformMovieFunctionParameterInt(200)
+        PopScaleformMovieFunctionVoid()
 
-    PushScaleformMovieFunction(scaleform, "SET_DATA_SLOT")
-    PushScaleformMovieFunctionParameterInt(1)
-    InstructionalButton("~INPUT_417C207D~", "Exit Spectate Mode")
-    PopScaleformMovieFunctionVoid()
+        PushScaleformMovieFunction(scaleform, "SET_DATA_SLOT")
+        PushScaleformMovieFunctionParameterInt(1)
+        InstructionalButton(GetControlInstructionalButton(1, 194), "Exit Spectate Mode")
+        PopScaleformMovieFunctionVoid()
 
 
-    PushScaleformMovieFunction(scaleform, "DRAW_INSTRUCTIONAL_BUTTONS")
-    PopScaleformMovieFunctionVoid()
+        PushScaleformMovieFunction(scaleform, "DRAW_INSTRUCTIONAL_BUTTONS")
+        PopScaleformMovieFunctionVoid()
 
-    PushScaleformMovieFunction(scaleform, "SET_BACKGROUND_COLOUR")
-    PushScaleformMovieFunctionParameterInt(0)
-    PushScaleformMovieFunctionParameterInt(0)
-    PushScaleformMovieFunctionParameterInt(0)
-    PushScaleformMovieFunctionParameterInt(80)
-    PopScaleformMovieFunctionVoid()
+        PushScaleformMovieFunction(scaleform, "SET_BACKGROUND_COLOUR")
+        PushScaleformMovieFunctionParameterInt(0)
+        PushScaleformMovieFunctionParameterInt(0)
+        PushScaleformMovieFunctionParameterInt(0)
+        PushScaleformMovieFunctionParameterInt(80)
+        PopScaleformMovieFunctionVoid()
 
-    return scaleform
+        while isSpectateEnabled do
+            DrawScaleformMovieFullscreen(scaleform, 255, 255, 255, 255, 0)
+            Wait(0)
+        end
+        SetScaleformMovieAsNoLongerNeeded()
+    end)
+end
+
+local function calculateSpectatorCoords(coords)
+    return vec3(coords[1], coords[2], coords[3] - 15.0)
 end
 
 --- Called every 50 frames in SpectateMode to determine whether or not to recreate the GamerTag
@@ -79,6 +94,36 @@ end
 local function preparePlayerForSpec(bool)
     local playerPed = PlayerPedId()
     FreezeEntityPosition(playerPed, bool)
+    SetEntityVisible(playerPed, not bool, 0)
+end
+
+local function createSpectatorTeleportThread()
+    debugPrint('Starting teleporting follower thread')
+    CreateThread(function()
+        while isSpectateEnabled do
+            Wait(500)
+
+            -- Check if ped still exists
+            if not DoesEntityExist(storedTargetPed) then
+                local _ped = GetPlayerPed(storedTargetPlayerId)
+                if _ped > 0 then
+                    if _ped ~= storedTargetPed then
+                        debugPrint(("Spectated player (%s) changed ped to %s"):format(storedTargetPlayerId, _ped))
+                        storedTargetPed = _ped
+                    end
+                    storedTargetPed = _ped
+                else
+                    debugPrint(("Spectated player (%s) no longer exists, ending spectate..."):format(storedTargetPlayerId))
+                    toggleSpectate(storedTargetPed, storedTargetPlayerId)
+                    break
+                end
+            end
+
+            -- Update Teleport
+            local newSpectateCoords = calculateSpectatorCoords(GetEntityCoords(storedTargetPed))
+            SetEntityCoords(PlayerPedId(), newSpectateCoords.x, newSpectateCoords.y, newSpectateCoords.z, 0, 0, 0, false)
+        end
+    end)
 end
 
 --- Will toggle spectate for a targeted ped
@@ -133,42 +178,76 @@ local function toggleSpectate(targetPed, targetPlayerId)
         DoScreenFadeIn(500)
         debugPrint(('Now spectating TargetPed (%s)'):format(targetPed))
         isSpectateEnabled = true
+        createSpectatorTeleportThread()
+        createScaleformThread()
     end
 end
-
 
 RegisterCommand('txAdmin:menu:endSpectate', function()
     if isSpectateEnabled then
         toggleSpectate(storedTargetPed)
         preparePlayerForSpec(false)
+        TriggerServerEvent('txAdmin:menu:endSpectate')
     end
 end)
 
-RegisterNetEvent('txAdmin:menu:specPlayerResp', function(playerId, coords)
+-- Run whenever we failed to resolve a target player to spectate
+local function cleanupFailedResolve()
     local playerPed = PlayerPedId()
-    lastSpectateLocation = GetEntityCoords(playerPed)
 
-    local clientPlayerId = GetPlayerFromServerId(playerId)
-    if clientPlayerId == PlayerId() then
-        return sendSnackbarMessage('error', 'You cannot spectate yourself!')
+    RequestCollisionAtCoord(lastSpectateLocation.x, lastSpectateLocation.y, lastSpectateLocation.z)
+    SetEntityCoords(playerPed, lastSpectateLocation.x, lastSpectateLocation.y, lastSpectateLocation.z)
+    -- The player is still frozen while we wait for collisions to load
+    while not HasCollisionLoadedAroundEntity(playerPed) do
+        Wait(5)
+    end
+    preparePlayerForSpec(false)
+
+    DoScreenFadeIn(500)
+
+    sendSnackbarMessage('error', 'nui_menu.player_modal.actions.interaction.notifications.spectate_failed', true)
+end
+
+-- Client-side event handler for an authorized spectate request
+RegisterNetEvent('txAdmin:menu:specPlayerResp', function(targetServerId, coords)
+    local spectatorPed = PlayerPedId()
+    lastSpectateLocation = GetEntityCoords(spectatorPed)
+
+    local targetPlayerId = GetPlayerFromServerId(targetServerId)
+    if targetPlayerId == PlayerId() then
+        return sendSnackbarMessage('error', 'nui_menu.player_modal.actions.interaction.notifications.spectate_yourself', true)
     end
 
     DoScreenFadeOut(500)
     while not IsScreenFadedOut() do Wait(0) end
 
-    SetEntityCoords(playerPed, coords.x, coords.y, coords.z - 15.0, 0, 0, 0, false)
+    local tpCoords = calculateSpectatorCoords(coords)
+    SetEntityCoords(spectatorPed, tpCoords.x, tpCoords.y, tpCoords.z, 0, 0, 0, false)
     preparePlayerForSpec(true)
 
-    ---- We need to wait to make sure that the player is actually available once we teleport
-    ---- this can take some time so we do this
+    --- We need to wait to make sure that the player is actually available once we teleport
+    --- this can take some time so we do this. Automatically breaks if a player isn't resolved
+    --- within 5 seconds.
+    local resolvePlayerAttempts = 0
+    local resolvePlayerFailed
+
     repeat
+        if resolvePlayerAttempts > 100 then
+            resolvePlayerFailed = true
+            break;
+        end
         Wait(50)
         debugPrint('Waiting for player to resolve')
-        clientPlayerId = GetPlayerFromServerId(playerId)
-    until (GetPlayerPed(clientPlayerId) > 0) and clientPlayerId ~= -1
+        targetPlayerId = GetPlayerFromServerId(targetServerId)
+        resolvePlayerAttempts = resolvePlayerAttempts + 1
+    until (GetPlayerPed(targetPlayerId) > 0) and targetPlayerId ~= -1
 
-    debugPrint('Target Ped sucessfully found!')
-    toggleSpectate(GetPlayerPed(clientPlayerId), clientPlayerId)
+    if resolvePlayerFailed then
+        return cleanupFailedResolve()
+    end
+
+    debugPrint('Target Ped successfully found!')
+    toggleSpectate(GetPlayerPed(targetPlayerId), targetPlayerId)
 end)
 
 CreateThread(function()
@@ -179,16 +258,5 @@ CreateThread(function()
             clearGamerTagInfo()
         end
         Wait(50)
-    end
-end)
-
-CreateThread(function()
-    local scaleform = setupScaleform()
-
-    while true do
-        if isSpectateEnabled then
-           DrawScaleformMovieFullscreen(scaleform, 255, 255, 255, 0)
-        end
-        Wait(0)
     end
 end)

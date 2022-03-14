@@ -5,43 +5,54 @@ end
 local apiHost = GetConvar("txAdmin-apiHost", "invalid")
 local pipeToken = GetConvar("txAdmin-pipeToken", "invalid")
 if apiHost == "invalid" or pipeToken == "invalid" then
-  print('API Host or Pipe Token ConVars not found. Do not start this resource if not using txAdmin.')
+  print('^1API Host or Pipe Token ConVars not found. Do not start this resource if not using txAdmin.')
   return
 end
+if pipeToken == "removed" then
+  print('^1Please do not restart the monitor resource.')
+  return
+end
+
+-- Erasing the token convar for security reasons, and then restoring it if debug mode.
+-- The convar needs to be reset on first tick to prevent other resources from reading it.
+-- We actually need to wait two frames: one for convar replication, one for debugPrint.
+SetConvar("txAdmin-pipeToken", "removed")
+CreateThread(function()
+  Wait(0)
+  if debugModeEnabled then
+    debugPrint("Restoring txAdmin-pipeToken for next monitor restart")
+    SetConvar("txAdmin-pipeToken", pipeToken)
+  end
+end)
+
+
+
+-- Vars
+ADMIN_DATA = {}
+local EMIT_BITRATE = 30000
+local LAST_PLAYER_DATA = {}
 
 -- How many MS is the interval for the update time
 -- Up this to bump client performance at the cost of player page updates
 local intervalUpdateTime = GetConvarInt('txAdminMenu-updateInterval', 5000)
 
---Erasing the token convar for security reasons
-if (GetConvar('txAdminMenu-debugMode', 'false') ~= 'true') then
-  SetConvar("txAdmin-pipeToken", "removed")
-end
-
-
--- Vars
-local adminPermissions = {}
-local EMIT_BITRATE = 30000
-local LAST_PLAYER_DATA = {}
-
-
 --- Determine if a source has a given permission
 ---@param source number
----@param permission string
+---@param reqPerm string
 ---@return boolean
-local function PlayerHasTxPermission(source, permission)
+function PlayerHasTxPermission(source, reqPerm)
   local allow = false
-  local perms = adminPermissions[tostring(source)]
-  if perms then
-    for _, perm in pairs(perms) do
-      if perm == 'all_permissions' or permission == perm then
+  local admin = ADMIN_DATA[tostring(source)]
+  if admin and admin.perms then
+    for _, perm in pairs(admin.perms) do
+      if perm == 'all_permissions' or reqPerm == perm then
         allow = true
         break
       end
     end
   end
   debugPrint(string.format("permission check (src=^3%d^0, perm=^4%s^0, result=%s^0)",
-    source, permission, (allow and '^2true' or '^1false')))
+  source, reqPerm, (allow and '^2true' or '^1false')))
   return allow
 end
 
@@ -49,17 +60,22 @@ end
 ---@param data table|nil
 local function sendFullClientData(id, data)
   data = data or LAST_PLAYER_DATA
-  TriggerLatentClientEvent('txAdmin:menu:setPlayerState', id, EMIT_BITRATE, data)
+  -- TriggerLatentClientEvent('txAdmin:menu:setPlayerState', id, EMIT_BITRATE, data)
+  TriggerClientEvent('txAdmin:menu:setPlayerState', id, data)
 end
 
 RegisterCommand('txAdmin-debug', function(src, args)
   if src > 0 then
-    if not PlayerHasTxPermission(src, 'control.server') then return end
+    if not PlayerHasTxPermission(src, 'control.server') then
+      return
+    end
   end
 
   local playerName = (src > 0) and GetPlayerName(src) or 'Console'
 
-  if not args[1] then return end
+  if not args[1] then
+    return
+  end
 
   if args[1] == '1' then
     debugModeEnabled = true
@@ -72,30 +88,30 @@ RegisterCommand('txAdmin-debug', function(src, args)
   end
 end)
 
----@param onlineAdminIDs table<number>
+---@param onlineAdminIDs table
 AddEventHandler('txAdmin:events:adminsUpdated', function(onlineAdminIDs)
   debugPrint('^3Admins changed. Online admins: ' .. json.encode(onlineAdminIDs) .. "^0")
-  
+
   -- Collect old and new admin IDs
   local refreshAdminIds = {}
-  for id, _ in pairs(adminPermissions) do
+  for id, _ in pairs(ADMIN_DATA) do
     refreshAdminIds[#refreshAdminIds + 1] = id
   end
   for _, newId in pairs(onlineAdminIDs) do
     refreshAdminIds[#refreshAdminIds + 1] = newId
   end
   debugPrint('^3Forcing ' .. #refreshAdminIds .. ' clients to re-auth')
-  
+
   -- Resetting all admin permissions
-  adminPermissions = {}
-  
+  ADMIN_DATA = {}
+
   -- Informing clients that they need to reauth
   for id, _ in pairs(refreshAdminIds) do
     TriggerClientEvent('txAdmin:menu:reAuth', id)
   end
 end)
 
--- 
+--
 -- [[ WebPipe Proxy ]]
 --
 local _pipeLastReject
@@ -113,10 +129,10 @@ local function sendResponse(src, callbackId, statusCode, path, body, headers, ca
   local resultColor = errorCode and '^1' or '^2'
   local cachedStr = cached and " ^1(cached)^0" or ""
   debugPrint(("^3WebPipe[^5%d^0:^1%d^3]^0 %s<< %s ^4%s%s^0"):format(
-    src, callbackId, resultColor, statusCode, path, cachedStr))
+      src, callbackId, resultColor, statusCode, path, cachedStr))
   if errorCode then
     debugPrint(("^3WebPipe[^5%d^0:^1%d^3]^0 %s<< Headers: %s^0"):format(
-      src, callbackId, resultColor, json.encode(headers)))
+        src, callbackId, resultColor, json.encode(headers)))
   end
   TriggerLatentClientEvent('txAdmin:WebPipe', src, 125000, callbackId, statusCode, body, headers)
 end
@@ -125,16 +141,20 @@ RegisterNetEvent('txAdmin:WebPipe')
 AddEventHandler('txAdmin:WebPipe', function(callbackId, method, path, headers, body)
   local s = source
   local src = tostring(s)
-  if type(callbackId) ~= 'number' or type(headers) ~= 'table' then return end
-  if type(method) ~= 'string' or type(path) ~= 'string' or type(body) ~= 'string' then return end
-  
-  -- Reject large paths as we use regex
-  if #path > 300 then 
-    return sendResponse(s, callbackId, 400, (path):sub(1, 300), "{}", {}) 
+  if type(callbackId) ~= 'number' or type(headers) ~= 'table' then
+    return
   end
-  
+  if type(method) ~= 'string' or type(path) ~= 'string' or type(body) ~= 'string' then
+    return
+  end
+
+  -- Reject large paths as we use regex
+  if #path > 300 then
+    return sendResponse(s, callbackId, 400, (path):sub(1, 300), "{}", {})
+  end
+
   -- Reject requests from un-authed players
-  if path ~= '/auth/nui' and not adminPermissions[src] then
+  if path ~= '/auth/nui' and not ADMIN_DATA[src] then
     if _pipeLastReject ~= nil then
       if (GetGameTimer() - _pipeLastReject) < 250 then
         _pipeLastReject = GetGameTimer()
@@ -142,18 +162,18 @@ AddEventHandler('txAdmin:WebPipe', function(callbackId, method, path, headers, b
       end
     end
     debugPrint(string.format(
-      "^3WebPipe[^5%d^0:^1%d^3]^0 ^1rejected request from ^3%s^1 for ^5%s^0", s, callbackId, s, path))
+        "^3WebPipe[^5%d^0:^1%d^3]^0 ^1rejected request from ^3%s^1 for ^5%s^0", s, callbackId, s, path))
     TriggerClientEvent('txAdmin:WebPipe', s, callbackId, 403, "{}", {})
     return
   end
-  
+
   -- Return fast cache
   if _pipeFastCache[path] ~= nil then
     local cachedData = _pipeFastCache[path]
     sendResponse(s, callbackId, 200, path, cachedData.data, cachedData.headers, true)
     return
   end
-  
+
   -- Adding auth information
   if path == '/auth/nui' then
     headers['X-TxAdmin-Token'] = pipeToken
@@ -161,7 +181,7 @@ AddEventHandler('txAdmin:WebPipe', function(callbackId, method, path, headers, b
   else
     headers['X-TxAdmin-Token'] = 'not_required' -- so it's easy to detect webpipes
   end
-  
+
   local url = "http://" .. apiHost .. path:gsub("//", "/")
   debugPrint(("^3WebPipe[^5%d^0:^1%d^3]^0 ^4>>^0 ^6%s^0"):format(s, callbackId, url))
   debugPrint(("^3WebPipe[^5%d^0:^1%d^3]^0 ^4>>^0 ^6Headers: %s^0"):format(s, callbackId, json.encode(headers)))
@@ -183,11 +203,11 @@ AddEventHandler('txAdmin:WebPipe', function(callbackId, method, path, headers, b
     if resultHeaders['Set-Cookie'] then
       local cookieHeader = resultHeaders['Set-Cookie']
       local cookies = type(cookieHeader) == 'table' and cookieHeader or { cookieHeader }
-      
+
       for k in pairs(cookies) do
         cookies[k] = cookies[k] .. '; SameSite=None; Secure'
       end
-      
+
       resultHeaders['Set-Cookie'] = cookies
     end
 
@@ -195,14 +215,22 @@ AddEventHandler('txAdmin:WebPipe', function(callbackId, method, path, headers, b
     if path == '/auth/nui' and httpCode == 200 then
       local resp = json.decode(data)
       if resp and resp.isAdmin then
-        debugPrint("Caching admin " .. s .. " permissions: " .. json.encode(resp.permissions))
-        adminPermissions[src] = resp.permissions
-        sendFullClientData(s)
+        if type(resp.permissions) == 'table' and type(resp.luaToken) == 'string' and string.len(resp.luaToken) == 20 then
+          debugPrint(("Authenticated admin %s with permissions %s and token %s."):format(src, json.encode(resp.permissions), resp.luaToken))
+          ADMIN_DATA[src] = {
+            perms = resp.permissions,
+            token = resp.luaToken
+          }
+          sendFullClientData(s)
+        else
+          debugPrint("Auth failed for admin %s due to response validation.")
+          ADMIN_DATA[src] = nil
+        end
       else
-        adminPermissions[src] = nil
+        ADMIN_DATA[src] = nil
       end
     end
-  
+
     -- cache response if it is a static file
     local sub = string.sub
     if httpCode == 200 and (sub(path, 1, 5) == '/css/' or sub(path, 1, 4) == '/js/' or sub(path, 1, 5) == '/img/' or sub(path, 1, 7) == '/fonts/') then
@@ -219,7 +247,7 @@ AddEventHandler('txAdmin:WebPipe', function(callbackId, method, path, headers, b
         break
       end
     end
-  
+
     sendResponse(s, callbackId, httpCode, path, data, resultHeaders)
   end, method, body, headers, {
     followLocation = false
@@ -272,8 +300,8 @@ local function syncServerCtx()
   ServerCtxObj.maxClients = svMaxClients
 
   -- FIXME: temporarily disabled;
-  -- local txAdminLocale = GetConvar('txAdmin-locale', 'en')
-  txAdminLocale = 'en'
+  -- FIXME: we cannot reenable while the custom locale doesn't work!
+  local txAdminLocale = 'en' -- GetConvar('txAdmin-locale', 'en')
   ServerCtxObj.locale = txAdminLocale
 
   debugPrint('Server CTX assigned to GlobalState, CTX:')
@@ -304,21 +332,21 @@ end)
 --
 
 
-RegisterServerEvent('txAdmin:menu:checkAccess', function()
+RegisterNetEvent('txAdmin:menu:checkAccess', function()
   local src = source
-  local canAccess = not (adminPermissions[tostring(src)] == nil)
+  local canAccess = not (ADMIN_DATA[tostring(src)] == nil)
   debugPrint((canAccess and "^2" or "^1") .. GetPlayerName(src) ..
-               " does " .. (canAccess and "" or "NOT ") .. "have menu permission.")
+      " does " .. (canAccess and "" or "NOT ") .. "have menu permission.")
   TriggerClientEvent('txAdmin:menu:setAccessible', src, canAccess)
 end)
 
-RegisterServerEvent('txAdmin:menu:playerModeChanged', function(mode)
+RegisterNetEvent('txAdmin:menu:playerModeChanged', function(mode)
   local src = source
   if mode ~= 'godmode' and mode ~= 'noclip' and mode ~= 'none' then
     debugPrint("Invalid player mode requested by " .. GetPlayerName(src) .. " (mode: " .. (mode or 'nil'))
     return
   end
-  
+
   local allow = PlayerHasTxPermission(src, 'players.playermode')
   TriggerEvent("txaLogger:menuEvent", src, "playerModeChanged", allow, mode)
   if allow then
@@ -326,7 +354,7 @@ RegisterServerEvent('txAdmin:menu:playerModeChanged', function(mode)
   end
 end)
 
-RegisterServerEvent('txAdmin:menu:healMyself', function()
+RegisterNetEvent('txAdmin:menu:healMyself', function()
   local src = source
   local allow = PlayerHasTxPermission(src, 'players.heal')
   TriggerEvent("txaLogger:menuEvent", src, "healSelf", allow)
@@ -335,30 +363,38 @@ RegisterServerEvent('txAdmin:menu:healMyself', function()
   end
 end)
 
-RegisterServerEvent('txAdmin:menu:healPlayer', function(id)
+RegisterNetEvent('txAdmin:menu:healPlayer', function(id)
   local src = source
-  if type(id) ~= 'string' and type(id) ~= 'number' then return end
+  if type(id) ~= 'string' and type(id) ~= 'number' then
+    return
+  end
   id = tonumber(id)
   local allow = PlayerHasTxPermission(src, 'players.heal')
   local playerName = "unknown"
   if allow then
     local ped = GetPlayerPed(id)
-    if ped then TriggerClientEvent('txAdmin:menu:healed', id) end
+    if ped then
+      TriggerClientEvent('txAdmin:menu:healed', id)
+    end
     playerName = GetPlayerName(id)
   end
   TriggerEvent('txaLogger:menuEvent', src, "healPlayer", allow, playerName)
 end)
 
-RegisterServerEvent('txAdmin:menu:spectatePlayer', function(id)
+RegisterNetEvent('txAdmin:menu:spectatePlayer', function(id)
   local src = source
   -- Sanity as this is still converted tonumber on client side
-  if type(id) ~= 'string' and type(id) ~= 'number' then return end
+  if type(id) ~= 'string' and type(id) ~= 'number' then
+    return
+  end
   id = tonumber(id)
   local allow = PlayerHasTxPermission(src, 'players.spectate')
   if allow then
     local target = GetPlayerPed(id)
     -- Lets exit if the target doesn't exist
-    if not target then return end
+    if not target then
+      return
+    end
 
     local tgtCoords = GetEntityCoords(target)
     TriggerClientEvent('txAdmin:menu:specPlayerResp', src, id, tgtCoords)
@@ -366,7 +402,7 @@ RegisterServerEvent('txAdmin:menu:spectatePlayer', function(id)
   TriggerEvent('txaLogger:menuEvent', src, 'spectatePlayer', allow, id)
 end)
 
-RegisterServerEvent('txAdmin:menu:healAllPlayers', function()
+RegisterNetEvent('txAdmin:menu:healAllPlayers', function()
   local src = source
   local allow = PlayerHasTxPermission(src, 'players.heal')
   TriggerEvent("txaLogger:menuEvent", src, "healAll", true)
@@ -378,10 +414,12 @@ end)
 ---@param x number|nil
 ---@param y number|nil
 ---@param z number|nil
-RegisterServerEvent('txAdmin:menu:tpToCoords', function(x, y, z)
+RegisterNetEvent('txAdmin:menu:tpToCoords', function(x, y, z)
   local src = source
-  if type(x) ~= 'number' or type(y) ~= 'number' or type(z) ~= 'number' then return end
-    
+  if type(x) ~= 'number' or type(y) ~= 'number' or type(z) ~= 'number' then
+    return
+  end
+
   local allow = PlayerHasTxPermission(src, 'players.teleport')
   TriggerEvent("txaLogger:menuEvent", src, "teleportCoords", true, { x = x, y = y, z = z })
   if allow then
@@ -389,13 +427,15 @@ RegisterServerEvent('txAdmin:menu:tpToCoords', function(x, y, z)
   end
 end)
 
-RegisterServerEvent('txAdmin:menu:tpToPlayer', function(id)
+RegisterNetEvent('txAdmin:menu:tpToPlayer', function(id)
   local src = source
-  if type(id) ~= 'number' then return end
-    
+  if type(id) ~= 'number' then
+    return
+  end
+
   local allow = PlayerHasTxPermission(src, 'players.teleport')
   local data = { x = nil, y = nil, z = nil, playerName = nil }
-    
+
   data.playerName = "unknown"
   if allow then
     -- ensure the player ped exists
@@ -409,13 +449,15 @@ RegisterServerEvent('txAdmin:menu:tpToPlayer', function(id)
       TriggerClientEvent('txAdmin:menu:tpToCoords', src, data.x, data.y, data.z)
     end
   end
-  
+
   TriggerEvent('txaLogger:menuEvent', src, 'teleportPlayer', allow, data)
 end)
 
-RegisterServerEvent('txAdmin:menu:summonPlayer', function(id)
+RegisterNetEvent('txAdmin:menu:summonPlayer', function(id)
   local src = source
-  if type(id) ~= 'number' then return end
+  if type(id) ~= 'number' then
+    return
+  end
   local allow = PlayerHasTxPermission(src, 'players.teleport')
   local playerName = "unknown"
   if allow then
@@ -430,7 +472,7 @@ RegisterServerEvent('txAdmin:menu:summonPlayer', function(id)
   TriggerEvent('txaLogger:menuEvent', src, 'summonPlayer', allow, playerName)
 end)
 
-RegisterServerEvent('txAdmin:menu:tpToWaypoint', function()
+RegisterNetEvent('txAdmin:menu:tpToWaypoint', function()
   local src = source
   local allow = PlayerHasTxPermission(src, 'players.teleport')
   if allow then
@@ -438,15 +480,17 @@ RegisterServerEvent('txAdmin:menu:tpToWaypoint', function()
     Wait(250)
     local coords = GetEntityCoords(GetPlayerPed(src))
     TriggerEvent("txaLogger:menuEvent", src, "teleportWaypoint", true,
-      { x = coords[1], y = coords[2], z = coords[3] })
+        { x = coords[1], y = coords[2], z = coords[3] })
   else
     TriggerEvent("txaLogger:menuEvent", src, "teleportWaypoint", false)
   end
 end)
 
-RegisterServerEvent('txAdmin:menu:sendAnnouncement', function(message)
+RegisterNetEvent('txAdmin:menu:sendAnnouncement', function(message)
   local src = source
-  if type(message) ~= 'string' then return end
+  if type(message) ~= 'string' then
+    return
+  end
   local allow = PlayerHasTxPermission(src, 'players.message')
   TriggerEvent("txaLogger:menuEvent", src, "announcement", allow, message)
   if allow then
@@ -454,7 +498,7 @@ RegisterServerEvent('txAdmin:menu:sendAnnouncement', function(message)
   end
 end)
 
-RegisterServerEvent('txAdmin:menu:fixVehicle', function()
+RegisterNetEvent('txAdmin:menu:fixVehicle', function()
   local src = source
   local allow = PlayerHasTxPermission(src, 'menu.vehicle')
   TriggerEvent("txaLogger:menuEvent", src, "vehicleRepair", allow)
@@ -463,23 +507,36 @@ RegisterServerEvent('txAdmin:menu:fixVehicle', function()
   end
 end)
 
+RegisterNetEvent('txAdmin:menu:clearArea', function(radius)
+  local src = source
+  local allow = PlayerHasTxPermission(src, 'menu.clear_area')
+  TriggerEvent("txaLogger:menuEvent", src, "clearArea", allow, radius)
+  if allow then
+    TriggerClientEvent('txAdmin:menu:clearArea', src, radius)
+  end
+end)
+
 local CREATE_AUTOMOBILE = GetHashKey('CREATE_AUTOMOBILE')
 
 --- Spawn a vehicle on the server at the request of a client
 ---@param model string
 ---@param isAutomobile boolean
-RegisterServerEvent('txAdmin:menu:spawnVehicle', function(model, isAutomobile)
+RegisterNetEvent('txAdmin:menu:spawnVehicle', function(model, isAutomobile)
   local src = source
-  if type(model) ~= 'string' then return end
-  if type(isAutomobile) ~= 'boolean' then return end
-  
+  if type(model) ~= 'string' then
+    return
+  end
+  if type(isAutomobile) ~= 'boolean' then
+    return
+  end
+
   local allow = PlayerHasTxPermission(src, 'menu.vehicle')
   TriggerEvent("txaLogger:menuEvent", src, "spawnVehicle", allow, model)
   if allow then
     local ped = GetPlayerPed(src)
     local coords = GetEntityCoords(ped)
     local heading = GetEntityHeading(ped)
-  
+
     local seatsToPlace = {}
     local oldVeh = GetVehiclePedIsIn(ped, false)
     if oldVeh and oldVeh > 0 then
@@ -492,10 +549,10 @@ RegisterServerEvent('txAdmin:menu:spawnVehicle', function(model, isAutomobile)
     else
       seatsToPlace[-1] = ped
     end
-    
+
     local veh
     if isAutomobile then
-      coords = vec4(coords[1], coords[2], coords[3], heading) 
+      coords = vec4(coords[1], coords[2], coords[3], heading)
       veh = Citizen.InvokeNative(CREATE_AUTOMOBILE, GetHashKey(model), coords);
     else
       veh = CreateVehicle(model, coords[1], coords[2], coords[3], heading, true, true)
@@ -510,7 +567,7 @@ RegisterServerEvent('txAdmin:menu:spawnVehicle', function(model, isAutomobile)
     end
     local netID = NetworkGetNetworkIdFromEntity(veh)
     debugPrint(string.format("spawn vehicle (src=^3%d^0, model=^4%s^0, isAuto=%s^0, netID=^3%s^0)", src, model,
-      (isAutomobile and '^2yes' or '^3no'), netID))
+        (isAutomobile and '^2yes' or '^3no'), netID))
 
     -- map all player ids to peds
     local players = GetPlayers()
@@ -530,6 +587,18 @@ RegisterServerEvent('txAdmin:menu:spawnVehicle', function(model, isAutomobile)
   end
 end)
 
+--- Deletes the vehicle the player is currently in
+--- @param netId int 
+RegisterNetEvent("txAdmin:menu:deleteVehicle", function(netId)
+  local src = source
+  local allow = PlayerHasTxPermission(src, 'menu.vehicle')
+  TriggerEvent("txaLogger:menuEvent", src, "deleteVehicle", allow)
+  if allow then
+    local vehicle = NetworkGetEntityFromNetworkId(netId)
+    DeleteEntity(vehicle)
+  end
+end)
+
 local function getPlayersLicense(src)
   for _, v in ipairs(GetPlayerIdentifiers(src)) do
     if string.sub(v, 1, string.len("license:")) == "license:" then
@@ -539,14 +608,15 @@ local function getPlayersLicense(src)
 end
 
 --[[ Emit player list to clients ]]
+-- FIXME: old playerlist, remove
 CreateThread(function()
   local ceil = math.ceil
   local sub = string.sub
   local pairs = pairs
-  
+
   while true do
     Wait(intervalUpdateTime)
-  
+
     local totalFound = 0
     local found = {}
     local players = GetPlayers()
@@ -556,56 +626,70 @@ CreateThread(function()
       if veh > 0 then
         veh = NetworkGetNetworkIdFromEntity(veh)
       end
-      
+
       local health = ceil(((GetEntityHealth(ped) - 100) / 100) * 100)
       -- trim to prevent long usernames from impacting event deliverance
-      local username = sub(GetPlayerName(serverID), 1, 75)
+      local username = sub(GetPlayerName(serverID) or "unknown", 1, 75)
       local coords
       if ServerCtxObj.oneSync.status == true then
         coords = GetEntityCoords(ped)
       else
         coords = -1
       end
-      
+
       local lastData = LAST_PLAYER_DATA[serverID] or {}
       if type(LAST_PLAYER_DATA[serverID]) ~= 'table' then
         LAST_PLAYER_DATA[serverID] = {}
       end
-        
+
       local emitData = {}
       local sendAll = (lastData.i == nil)
-      if sendAll or lastData.h ~= health then emitData.h = health end
-      if sendAll or lastData.v ~= veh then emitData.v = veh end
-      if sendAll or lastData.u ~= username then emitData.u = username end
-      if sendAll or lastData.c ~= coords then emitData.c = coords end
-      if sendAll then emitData.l = getPlayersLicense(serverID) end
+      if sendAll or lastData.h ~= health then
+        emitData.h = health
+      end
+      if sendAll or lastData.v ~= veh then
+        emitData.v = veh
+      end
+      if sendAll or lastData.u ~= username then
+        emitData.u = username
+      end
+      if sendAll or lastData.c ~= coords then
+        emitData.c = coords
+      end
+      if sendAll then
+        emitData.l = getPlayersLicense(serverID)
+      end
       emitData.i = serverID
       for k, v in pairs(emitData) do
         LAST_PLAYER_DATA[serverID][k] = v
-        debugPrint(("^1emit ^4%d :: ^2%s^1 = ^3%s^0"):format(serverID, k, v))
+        -- debugPrint(("^1emit ^4%d :: ^2%s^1 = ^3%s^0"):format(serverID, k, v))
       end
       found[#found + 1] = emitData
       totalFound = totalFound + 1
       Wait(0)
     end
-    
+
     -- calculate the number of admins
     local totalAdmins = 0
-    for _ in pairs(adminPermissions) do totalAdmins = totalAdmins + 1 end
-  
-    if totalAdmins > 0 and totalFound > 0 then
-      debugPrint("^4Sending ^3" .. totalFound .. "^4 users details to ^3" .. totalAdmins .. "^4 admins^0")
+    for _ in pairs(ADMIN_DATA) do
+      totalAdmins = totalAdmins + 1
     end
-      
-    for id, _ in pairs(adminPermissions) do
+
+    if totalAdmins > 0 and totalFound > 0 then
+      -- debugPrint("^4Sending ^3" .. totalFound .. "^4 users details to ^3" .. totalAdmins .. "^4 admins^0")
+    end
+
+    for id, _ in pairs(ADMIN_DATA) do
       sendFullClientData(id, found)
     end
-  end
+
+
+  end --end while true
 end)
 
 --[[ Handle player disconnects ]]
 AddEventHandler('playerDropped', function()
   local s = source
-  adminPermissions[tostring(s)] = nil
+  ADMIN_DATA[tostring(s)] = nil
   LAST_PLAYER_DATA[tostring(s)] = nil
 end)
