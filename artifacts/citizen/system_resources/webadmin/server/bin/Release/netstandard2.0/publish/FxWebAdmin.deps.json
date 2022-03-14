@@ -8,7 +8,15 @@
       "TRACE",
       "RELEASE",
       "NETSTANDARD",
-      "NETSTANDARD2_0"
+      "NETSTANDARD2_0",
+      "NETSTANDARD1_0_OR_GREATER",
+      "NETSTANDARD1_1_OR_GREATER",
+      "NETSTANDARD1_2_OR_GREATER",
+      "NETSTANDARD1_3_OR_GREATER",
+      "NETSTANDARD1_4_OR_GREATER",
+      "NETSTANDARD1_5_OR_GREATER",
+      "NETSTANDARD1_6_OR_GREATER",
+      "NETSTANDARD2_0_OR_GREATER"
     ],
     "languageVersion": "7.3",
     "platform": "",

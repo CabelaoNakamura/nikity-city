@@ -1,0 +1,18 @@
+coloque na pasta  [carros] 
+caso nao tenha crie uma lembre de colocar os cochetes --> [carros] <-- 
+
+abra o seu resources.cfg algumas bases esta tudo em server.cfg o importante é dar start nele
+
+start bmwr1250
+
+ou 
+
+ensure bmwr1250
+
+veja como esta para iniciar os outros e faça conforme 
+
+depois é so ir no fivem e digitar 
+
+/car bmwr1250
+
+lembre-se de reiniciar o servidor para evitar conflitos

@@ -1,5 +1,4 @@
 // CFX JS runtime
-/// <reference path="./natives_blank.d.ts" />
 /// <reference path="./natives_server.d.ts" />
 
 const EXT_FUNCREF = 10;
@@ -90,7 +89,26 @@ const EXT_LOCALFUNCREF = 11;
 					case 0:
 						return undefined;
 					case 1:
-						return retvals[0];
+						const rv = retvals[0];
+						if (rv && rv['__cfx_async_retval']) {
+							return new Promise((res, rej) => {
+								rv['__cfx_async_retval']((v, e) => {
+									if (e != null)
+										rej(e);
+									else {
+										switch(v.length) {
+											case 0:
+												res(undefined);
+											case 1:
+												res(v[0]);
+											default:
+												res(v);
+										}
+									}
+								});
+							});
+						}
+						return rv;
 					default:
 						return retvals;
 				}
@@ -98,6 +116,8 @@ const EXT_LOCALFUNCREF = 11;
 		};
 	}
 
+	const AsyncFunction = (async () => {}).constructor;
+	codec.addExtPacker(EXT_FUNCREF, AsyncFunction, refFunctionPacker);
 	codec.addExtPacker(EXT_FUNCREF, Function, refFunctionPacker);
 	codec.addExtUnpacker(EXT_FUNCREF, refFunctionUnpacker);
 	codec.addExtUnpacker(EXT_LOCALFUNCREF, refFunctionUnpacker);
@@ -132,7 +152,19 @@ const EXT_LOCALFUNCREF = 11;
 
 		try {
 			return runWithBoundaryStart(() => {
-				return pack([refFunctionsMap.get(ref).callback(...unpack(argsSerialized))]);
+				const rv = refFunctionsMap.get(ref).callback(...unpack(argsSerialized));
+				if (rv instanceof Promise) {
+					return pack([{'__cfx_async_retval': (cb) => {
+						rv.then(v => {
+							if (cb != null)
+								cb([v], null);
+						}).catch(err => {
+							if (cb != null)
+								cb(null, err.message)
+						});
+					}}]);
+				}
+				return pack([rv]);
 			});
 		} catch (e) {
 			global.printError('call ref', e);
@@ -367,7 +399,7 @@ const EXT_LOCALFUNCREF = 11;
 
 	function processErrorQueue() {
 		for (const error of errorQueue) {
-			console.log(error.error);
+			console.log(getError('promise (unhandled)', error.error));
 		}
 
 		errorQueue = [];
@@ -380,13 +412,17 @@ const EXT_LOCALFUNCREF = 11;
 			let error = '';
 
 			if (value instanceof Error) {
-				error = getError('promise (unhandled)', value);
+				error = value;
 			} else {
-				error = getError('promise (unhandled)', new Error((value || '').toString()));
+				error = new Error((value || '').toString());
 			}
+
+			// grab the stack early so it'll remain valid
+			const stack = error.stack;
 
 			errorQueue.push({
 				error,
+				stack,
 				promise
 			});
 
@@ -565,10 +601,19 @@ const EXT_LOCALFUNCREF = 11;
 
 	global.GlobalState = NewStateBag('global');
 
+	function getEntityStateBagId(entityGuid) {
+		if (isDuplicityVersion || NetworkGetEntityIsNetworked(entityGuid)) {
+			return `entity:${NetworkGetNetworkIdFromEntity(entityGuid)}`;
+		} else {
+			EnsureEntityStateBag(entityGuid);
+			return `localEntity:${entityGuid}`;
+		}
+	}
+
 	const entityTM = {
 		get(t, k) {
 			if (k === 'state') {
-				const es = `entity:${NetworkGetNetworkIdFromEntity(t.__data)}`;
+				const es = getEntityStateBagId(t.__data);
 
 				if (isDuplicityVersion) {
 					EnsureEntityStateBag(t.__data);
@@ -640,6 +685,10 @@ const EXT_LOCALFUNCREF = 11;
 
 		return ent;
 	};
+
+	if (!isDuplicityVersion) {
+		global.LocalPlayer = Player(-1);
+	}
 
 	/*
 	BEGIN

@@ -1,7 +1,15 @@
+-- =============================================
+--  This file contains all overhead player ID logic
+-- =============================================
+if (GetConvar('txAdmin-menuEnabled', 'false') ~= 'true') then
+    return
+end
+
 local isPlayerIDActive = false
 local playerGamerTags = {}
 
-local distanceToCheck = GetConvarInt('txAdminMenu-playerIdDistance', 150)
+-- Convar used to determine the distance in which player ID's are visible
+local distanceToCheck = GetConvarInt('txAdmin-menuPlayerIdDistance', 150)
 
 local gamerTagCompsEnum = {
     GamerName = 0,
@@ -78,18 +86,27 @@ local function showGamerTags()
     end
 end
 
-RegisterNUICallback('togglePlayerIDs', function(_, cb)
+local function togglePlayerIDsHandler()
+    if not menuIsAccessible then return end
+
     isPlayerIDActive = not isPlayerIDActive
-
-    cb({ isShowing = isPlayerIDActive })
-
     if not isPlayerIDActive then
+        sendSnackbarMessage('info', 'nui_menu.page_main.player_ids.alert_hide', true)
         -- Remove all gamer tags and clear out active table
         cleanUpGamerTags()
+    else
+        sendSnackbarMessage('info', 'nui_menu.page_main.player_ids.alert_show', true)
     end
 
     debugPrint('Show Player IDs Status: ' .. tostring(isPlayerIDActive))
+end
+
+RegisterNUICallback('togglePlayerIDs', function(_, cb)
+    togglePlayerIDsHandler()
+    cb({})
 end)
+
+RegisterCommand('txAdmin:menu:togglePlayerIDs', togglePlayerIDsHandler)
 
 CreateThread(function()
     local sleep = 150

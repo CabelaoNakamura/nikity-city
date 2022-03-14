@@ -463,7 +463,145 @@ More:
 - [x] remove the discord login option
 - [x] version bump
 > v3.8.0
-
+- [x] fixed perf chart labels
+- [x] reorganize web js files
+- [x] remove all `var` from web and core
+- [x] core: optimize host stats collection
+- [x] web: prepare html/js for nui mode (remove elements)
+- [X] web: create `txAdminAPI` and replace all `$.ajax`
+- [x] increase page timeouts
+- [x] change webserver token every time the server starts
+- [x] ADDED MENU, TOO MANY CHANGES TO KEEP TRACK
+> v4.0.0
+- [x] fixed menu not working due to unreplicated convar at first tick
+> v4.0.0
+- [x] Fixed OneSync Legacy issues;
+- [x] Fixed Focus issues (No more bugs with chat, vMenu, etc);
+- [x] Fixed NoClip on vehicle causing physics collision to break;
+- [x] Fixed escape/backspace not closing menu;
+- [x] Fixed an issue that broke restart/stop the server, as well as whitelist players on in-game txAdmin page;
+- [x] Many player modal issues solved (notes, styling, data displayed, etc).
+- [x] Enabled Live Console for the in-game page;
+- [x] Added a spectate action to the player modal (requires the new player.spectate permission);
+- [x] Added option to see Player IDs;
+- [x] Improved the vehicle spawn handling of car occupants;
+- [x] Added the convars txAdminMenu-updateInterval and txAdminMenu-pageKey, as well as the command /txAdmin-debug. Please read the docs for more information.
+- [x] ctxUtils: centralize basic render vars
+> v4.1.0
+- [x] updated turkish, lithuanian, italian
+- [x] Added troll actions (weed/drunk/fire/wild attack)
+- [x] Added button to copy current coords
+- [x] Fixed player ban not working in the menu
+- [x] lua small fixes
+  - fix sv_menu sub name error
+  - fix sv_logger explosion source
+  - remove spectate keybind
+- [x] add logging and confirmation snackbars to troll actions
+- [x] menu: fix zap auth
+- [x] fix old admins.json breaking on the identifiers validation
+- [x] revert: don't open url when admins are configured
+> v4.2.0
+- [x] fix(menu): Disable all files if convar isn't set
+- [x] refactor(scripts/menu): Break cl_main into several files
+- [x] feat(menu/announce): Dynamic announce duration based on length
+- [x] fix(menu): Fix race condition between NUI and scripts for ServerCtx
+- [x] fix(menu/main): Disable vehicle spawning if OneSync is off
+- [x] fix(menu/modal): fix permanent ban not working
+- [x] fix(scripts/menu): Fix NoClip setting disable game controls override
+- [x] fix: accept the new license format 
+- [x] diagnostics: use `globals.monitor.hostStats` instead of `systeminformation`
+- [x] many small fixes and tweaks
+> v4.3.0
+- [x] menu: fixed announcements duration
+- [x] menu: changed playermode snackbar to center
+> v4.3.1
+- [x] fixed: actions executing twice caused by build issues and fxmanifest globbing (eg spawning two cars);
+- [x] fixed: teleporting under the ground;
+- [x] fixed: noclip camera going crazy when using kashacters;
+- [x] fixed: holding enter would execute the same action multiple times;
+- [x] added heading to the copy coords command;
+- [x] added keybind for NoClip (in FiveM settings);
+- [x] added visual indication of which options you do not have permission for;
+- [x] improved error handling on the player's modal;
+- [x] many small fixed and tweaks, as well as package updates.
+> v4.4.0
+- [x] tweak(menu): added weird padding for version tag
+- [x] fix(menu/lua): fixed noclip toggle permission
+- [x] tweak(menu): temporarily disabled locale, again
+> v4.4.1
+- [x] fixed diagnostics page not rendering in some pages;
+- [x] added "clear area" command (for now, doesn't clear server-spawned entities);
+- [x] possibly fixed the menu playerlist sync issues;
+- [x] a few small fixes and tweaks.
+> v4.4.2
+- [x] changed onesync to be "on" by default
+- [x] noclip: update heading automatically + optimization
+- [x] tweak: error logging stuff
+- [x] feat: chart data rate limit
+- [x] feat(web/diagnostics): redacting cfx/steam/tebex keys
+- [x] feat: prevent noobs from messing setup/deploy opts
+- [x] tweak(core): removed space checking in fx paths
+- [x] fix(menu/spectate): fix for audio / texture loss when spectating a moving player 
+- [x] feat: allow two tx on same browser (closes #395)
+- [x] fix(client/state): fix not properly checking for netId existing, closes #443
+- [x] feat(menu/main): delete vehicle sub option
+- [x] fix(core): memory leak on server log 
+- [x] fix(nui): auth source for zap servers
+- [x] chore: updated a few dependencies
+> v4.5.0
+- [x] potentially fixed spectate black screen
+- [x] added player freeze option
+- [x] added option for right align of the menu
+- [x] removed ip logging
+- [x] fixed persistent focus after menu close by /tx
+- [x] fixed spectate with wrong scaleform instructions after noclip
+- [x] fixed noclip moving player back
+- [x] added announcement button to console page (#403)
+- [x] fix cause of death being always suicide (commit 9434d427)
+- [x] update material ui to v5
+- [x] fix(core): removed ansi color escape from srvCmdBuffer
+- [x] new server log with pagination and filter
+- [x] document new log thing
+- [x] clean this file
+- [x] update dev env to fxs/node16 
+- [x] update packages & test
+- [x] feat: database management page
+- [x] fix logging data on diagnostics page
+- [x] fix dashboard stats not working on iframe mode (closes #438)
+- [x] fix player modal for new server log
+> v4.6.0
+- [x] rolled back fs-extra to v9.1.0
+> v4.6.1
+- [x] fixed text visibility on light theme
+- [x] fixed wrong freeze yourself message
+- [x] allow removal of revoked warns
+- [x] fixed chat suggestions not working
+- [x] spectate and freeze not showing in log
+- [x] improved action logging names + reorder
+- [x] fixed placeholder recipe detection
+- [x] menu: new playerlist
+- [x] properly handle freezing peds in vehicles
+- [x] fix(scripts/spectate): handling for primary routing buckets not being 0
+- [x] fix(deployer): changed zip library to solve errors
+- [x] chore: updated some packages
+> v4.7.0
+- [x] fix(menu/players-page): fix sorting unknown distances higher than known
+- [x] tweak(menu/players-page): reflect players low health with color change
+- [x] fix(scripts/player-list): normalize health to percentage
+- [x] Remove the "NEW" tag from `header.html` and `masterActions.html`
+- [x] Implement new menu auth method
+- [x] Add keybind for opening players page
+- [x] Add keybind for toggling player IDs
+- [x] Fix menu healthbar colors
+- [x] Enable custom locale for menu
+- [x] Reorganize menu buttons.
+- [x] Reorganize all translation keys
+- [x] Migrate warn to use the event + react translation
+- [x] Solve sticky cookie after reauth issue
+- [x] Fix the manage admins perm issue
+- [x] Update packages
+- [x] Test new NUI Auth on ZAP server
+> v4.8.0
 
 ------------------------------
 > NOTE: this was an attempt to get the help from the community around september 2019
