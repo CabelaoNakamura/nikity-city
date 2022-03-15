@@ -17,5 +17,5 @@ data_file "DLC_ITYP_REQUEST" "stream/creativeInteriores/v_int_49.ytyp"
 data_file "DLC_ITYP_REQUEST" "stream/creativeInteriores/creative_hotel.ytyp"
 data_file "DLC_ITYP_REQUEST" "stream/creativeInteriores/creative_middle.ytyp"
 data_file 'DLC_ITYP_REQUEST' 'stream/patoche_elevatorb1.ytyp'
-data_file'DLC_ITYP_REQUEST' 'stream/**paleto_garage_ytyp.ytyp'
+data_file'DLC_ITYP_REQUEST' 'stream/nikityGaragePaleto/**paleto_garage_ytyp.ytyp'
 data_file'DLC_ITYP_REQUEST' 'stream/nikityGaragePaleto/**paleto_garage_props.ytyp'
