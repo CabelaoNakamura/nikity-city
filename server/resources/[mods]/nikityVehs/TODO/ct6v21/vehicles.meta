@@ -128,17 +128,6 @@
     </Item>
  </InitDatas>
  <txdRelationships>
-    <Item>
-      <parent>ct6v211</parent>
-      <child>ct6v21</child>
-    </Item>
-	<Item>
-      <parent>vehicles_schaf_interior</parent>
-      <child>ct6v211</child>
-    </Item>
-	<Item>
-      <parent>vehshare</parent>
-      <child>vehicles_schaf_interior</child>
-    </Item>
+    
  </txdRelationships>
 </CVehicleModelInfo__InitDataList> 
