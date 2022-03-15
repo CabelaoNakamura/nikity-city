@@ -290,7 +290,7 @@ Citizen.CreateThread(function()
 
     if not chatInputActive then
       splyphe = 0
-      if IsControlPressed(0, isRDR and `INPUT_MP_TEXT_CHAT_ALL` or 245) --[[ INPUT_MP_TEXT_CHAT_ALL ]] then
+      if IsControlPressed(0, isRDR and "INPUT_MP_TEXT_CHAT_ALL" or 245) --[[ INPUT_MP_TEXT_CHAT_ALL ]] then
         chatInputActive = true
         chatInputActivating = true
 
@@ -302,7 +302,7 @@ Citizen.CreateThread(function()
 
     if chatInputActivating then
       splyphe = 0
-      if not IsControlPressed(0, isRDR and `INPUT_MP_TEXT_CHAT_ALL` or 245) then
+      if not IsControlPressed(0, isRDR and "INPUT_MP_TEXT_CHAT_ALL" or 245) then
         SetNuiFocus(true)
 
         chatInputActivating = false

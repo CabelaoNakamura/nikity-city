@@ -1,0 +1,24 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true
+    },
+    "hide-files.files": [],
+    "Lua.diagnostics.disable": [
+        "undefined-global",
+        "unbalanced-assignments",
+        "lowercase-global",
+        "redefined-local",
+        "redundant-parameter",
+        "unused-local"
+    ],
+    "Lua.diagnostics.globals": [
+        "vRP",
+        "vRPclient"
+    ],
+    "lua.targetVersion": "5.3"
+}

@@ -34,11 +34,11 @@ function CreateApartmentShell(spawn)
     while not IsScreenFadedOut() do
         Citizen.Wait(10)
     end
-	RequestModel(`appartment`)
-	while not HasModelLoaded(`appartment`) do
+	RequestModel("appartment")
+	while not HasModelLoaded("appartment") do
 	    Citizen.Wait(1000)
 	end
-	local house = CreateObject(`appartment`, spawn.x, spawn.y, spawn.z, false, false, false)
+	local house = CreateObject("appartment", spawn.x, spawn.y, spawn.z, false, false, false)
     FreezeEntityPosition(house, true)
 	table.insert(objects, house)
 
@@ -56,11 +56,11 @@ function CreateCaravanShell(spawn)
     while not IsScreenFadedOut() do
         Citizen.Wait(10)
     end
-	RequestModel(`caravan_shell`)
-	while not HasModelLoaded(`caravan_shell`) do
+	RequestModel("caravan_shell")
+	while not HasModelLoaded("caravan_shell") do
 	    Citizen.Wait(1000)
 	end
-	local house = CreateObject(`caravan_shell`, spawn.x, spawn.y, spawn.z, false, false, false)
+	local house = CreateObject("caravan_shell", spawn.x, spawn.y, spawn.z, false, false, false)
     FreezeEntityPosition(house, true)
 	table.insert(objects, house)
 
@@ -78,11 +78,11 @@ function CreateFranklinShell(spawn)
     while not IsScreenFadedOut() do
         Citizen.Wait(10)
     end
-	RequestModel(`frankelientje`)
-	while not HasModelLoaded(`frankelientje`) do
+	RequestModel("frankelientje")
+	while not HasModelLoaded("frankelientje") do
 	    Citizen.Wait(1000)
 	end
-	local house = CreateObject(`frankelientje`, spawn.x, spawn.y, spawn.z, false, false, false)
+	local house = CreateObject("frankelientje", spawn.x, spawn.y, spawn.z, false, false, false)
     FreezeEntityPosition(house, true)
 	table.insert(objects, house)
 
@@ -100,11 +100,11 @@ function CreateFranklinAuntShell(spawn)
     while not IsScreenFadedOut() do
         Citizen.Wait(10)
     end
-	RequestModel(`tante_shell`)
-	while not HasModelLoaded(`tante_shell`) do
+	RequestModel("tante_shell")
+	while not HasModelLoaded("tante_shell") do
 	    Citizen.Wait(1000)
 	end
-	local house = CreateObject(`tante_shell`, spawn.x, spawn.y, spawn.z, false, false, false)
+	local house = CreateObject("tante_shell", spawn.x, spawn.y, spawn.z, false, false, false)
     FreezeEntityPosition(house, true)
 	table.insert(objects, house)
 
@@ -122,11 +122,11 @@ function CreateMethlabShell(spawn)
     while not IsScreenFadedOut() do
         Citizen.Wait(10)
     end
-	RequestModel(`methlab_shell`)
-	while not HasModelLoaded(`methlab_shell`) do
+	RequestModel("methlab_shell")
+	while not HasModelLoaded("methlab_shell") do
 	    Citizen.Wait(1000)
 	end
-	local house = CreateObject(`methlab_shell`, spawn.x, spawn.y, spawn.z, false, false, false)
+	local house = CreateObject("methlab_shell", spawn.x, spawn.y, spawn.z, false, false, false)
     FreezeEntityPosition(house, true)
 	table.insert(objects, house)
 
