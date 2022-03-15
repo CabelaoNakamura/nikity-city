@@ -164,7 +164,7 @@ local function DriveInGarage()
 		end
 
 		myveh.wheeltype = GetVehicleWheelType(veh)
-		local chassis,interior,bumper,fbumper,rbumper = false,false,false,false
+		local chassis,interior,bumper,fbumper,rbumper = false,false,false,false,false
 		
 		for i = 0,48 do
 			if GetNumVehicleMods(veh,i) ~= nil and GetNumVehicleMods(veh,i) ~= false and GetNumVehicleMods(veh,i) > 0 then

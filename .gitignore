@@ -1,3 +1,5 @@
 artifacts/crashes
 /database
 server/cache
+server/resources/[mods]/nikityVehs/Otimizado/
+server/resources/[mods]/nikityVehs/Otimização/

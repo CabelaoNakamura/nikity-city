@@ -7,17 +7,17 @@ function CreateHotel(spawn)
     while not IsScreenFadedOut() do
         Citizen.Wait(10)
     end
-    RequestModel(`playerhouse_hotel`)
-	while not HasModelLoaded(`playerhouse_hotel`) do
+    RequestModel("playerhouse_hotel")
+	while not HasModelLoaded("playerhouse_hotel") do
 	    Citizen.Wait(1000)
 	end
-    local shell = CreateObject(`playerhouse_hotel`, spawn.x, spawn.y, spawn.z, false, false, false)
+    local shell = CreateObject("playerhouse_hotel", spawn.x, spawn.y, spawn.z, false, false, false)
     FreezeEntityPosition(shell, true)
     table.insert(objects, shell)
 
-    local curtains = CreateObject(`V_49_MotelMP_Curtains`, spawn.x + 1.55156000, spawn.y + (-3.83100100), spawn.z + 2.23457500)
+    local curtains = CreateObject("V_49_MotelMP_Curtains", spawn.x + 1.55156000, spawn.y + (-3.83100100), spawn.z + 2.23457500)
     table.insert(objects, curtains)
-    local window = CreateObject(`V_49_MotelMP_Curtains`, spawn.x + 1.43190000, spawn.y + (-3.92315100), spawn.z + 2.29329600)
+    local window = CreateObject("V_49_MotelMP_Curtains", spawn.x + 1.43190000, spawn.y + (-3.92315100), spawn.z + 2.29329600)
     table.insert(objects, window)
 
     TeleportToInterior(spawn.x + POIOffsets.exit.x, spawn.y + POIOffsets.exit.y, spawn.z + 1.5, POIOffsets.exit.h)
@@ -38,15 +38,15 @@ function CreateTier1House(spawn, isBackdoor)
     while not IsScreenFadedOut() do
         Citizen.Wait(10)
     end
-    RequestModel(`playerhouse_tier1`)
-	while not HasModelLoaded(`playerhouse_tier1`) do
+    RequestModel("playerhouse_tier1")
+	while not HasModelLoaded("playerhouse_tier1") do
 	    Citizen.Wait(1000)
 	end
-    local shell = CreateObject(`playerhouse_tier1`, spawn.x, spawn.y, spawn.z, false, false, false)
+    local shell = CreateObject("playerhouse_tier1", spawn.x, spawn.y, spawn.z, false, false, false)
     FreezeEntityPosition(shell, true)
     table.insert(objects, shell)
 
-    local dt = CreateObject(`V_16_DT`, spawn.x-1.21854400, spawn.y-1.04389600, spawn.z + 1.39068600, false, false, false)
+    local dt = CreateObject("V_16_DT", spawn.x-1.21854400, spawn.y-1.04389600, spawn.z + 1.39068600, false, false, false)
     table.insert(objects, dt)
 
     if not isBackdoor then
@@ -71,16 +71,16 @@ function CreateTier2House(spawn, isBackdoor)
     while not IsScreenFadedOut() do
         Citizen.Wait(10)
     end
-    RequestModel(`playerhouse_tier1`)
-	while not HasModelLoaded(`playerhouse_tier1`) do
+    RequestModel("playerhouse_tier1")
+	while not HasModelLoaded("playerhouse_tier1") do
 	    Citizen.Wait(1000)
 	end
-    local shell = CreateObject(`playerhouse_tier1`, spawn.x, spawn.y, spawn.z, false, false, false)
+    local shell = CreateObject("playerhouse_tier1", spawn.x, spawn.y, spawn.z, false, false, false)
     FreezeEntityPosition(shell, true)
 
     table.insert(objects, shell)
 
-    local dt = CreateObject(`V_16_DT`, spawn.x-1.21854400, spawn.y-1.04389600, spawn.z + 1.39068600, false, false, false)
+    local dt = CreateObject("V_16_DT", spawn.x-1.21854400, spawn.y-1.04389600, spawn.z + 1.39068600, false, false, false)
     table.insert(objects, dt)
 
 
@@ -103,17 +103,17 @@ function CreateTier3House(spawn, isBackdoor)
     while not IsScreenFadedOut() do
         Citizen.Wait(10)
     end
-    RequestModel(`playerhouse_tier3`)
-	while not HasModelLoaded(`playerhouse_tier3`) do
+    RequestModel("playerhouse_tier3")
+	while not HasModelLoaded("playerhouse_tier3") do
 	    Citizen.Wait(1000)
 	end
-    local shell = CreateObject(`playerhouse_tier3`, spawn.x, spawn.y, spawn.z, false, false, false)
+    local shell = CreateObject("playerhouse_tier3", spawn.x, spawn.y, spawn.z, false, false, false)
     table.insert(objects, shell)
-    RequestModel(`v_16_high_lng_over_shadow`)
-	while not HasModelLoaded(`v_16_high_lng_over_shadow`) do
+    RequestModel("v_16_high_lng_over_shadow")
+	while not HasModelLoaded("v_16_high_lng_over_shadow") do
 	    Citizen.Wait(1000)
 	end
-    local windows1 = CreateObject(`v_16_high_lng_over_shadow`, spawn.x + 10.16043000, spawn.y + -4.83294600, spawn.z + 4.99192700, false, false, false)
+    local windows1 = CreateObject("v_16_high_lng_over_shadow", spawn.x + 10.16043000, spawn.y + -4.83294600, spawn.z + 4.99192700, false, false, false)
     table.insert(objects, windows1)
 
     FreezeEntityPosition(shell, true)
