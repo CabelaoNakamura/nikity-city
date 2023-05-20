@@ -1,0 +1,1357 @@
+[33mcommit e8eb1ced65a547c4bdc712f65e5dcc2948e7e193[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: telmocosta12 <telmo.costa160@gmail.com>
+Date:   Sat May 20 02:52:31 2023 +0100
+
+    mais g63
+
+[33mcommit e3d6377a6213ef863f48dc9c708dd34d428dde25[m[33m ([m[1;31morigin/resources[m[33m)[m
+Author: Eric Nakamura <masaro.eric@gmail.com>
+Date:   Thu Mar 24 21:30:27 2022 +0000
+
+    ct6 v21 removed
+
+[33mcommit e7cd444e5eb21f489d8915d7187f0e73ef252432[m
+Author: Eric Nakamura <masaro.eric@gmail.com>
+Date:   Thu Mar 24 21:24:23 2022 +0000
+
+    NikityMaps changes
+
+[33mcommit e5da6e0dbb3384082b6cec81148566d5a39dcb14[m
+Author: CabelaoNakamura <hidekiarthur32@gmail.com>
+Date:   Tue Mar 15 21:44:47 2022 +0000
+
+    sla oq é isso
+
+[33mcommit 27c126f4e19e43b05fb659eebe9cc97e8cd3d643[m
+Author: Eric Nakamura <masaro.eric@gmail.com>
+Date:   Tue Mar 15 05:05:34 2022 +0000
+
+    la vai mais
+
+[33mcommit c136ade6ec58dbe13168f33ca2a3782560457715[m
+Author: Eric Nakamura <masaro.eric@gmail.com>
+Date:   Tue Mar 15 04:50:11 2022 +0000
+
+    Desunificação do mapa
+
+[33mcommit ae7818f7b06ec8a26b1dc3e667b81c91fb99fab7[m
+Merge: 4cec25b 5891082
+Author: Eric Nakamura <masaro.eric@gmail.com>
+Date:   Tue Mar 15 03:28:57 2022 +0000
+
+    Merge branch 'main' of https://github.com/CabelaoNakamura/nikity-city
+
+[33mcommit 4cec25b9f39a1e28bdcc1fbae885287224116f08[m
+Author: Eric Nakamura <masaro.eric@gmail.com>
+Date:   Tue Mar 15 03:28:47 2022 +0000
+
+    maps merged
+
+[33mcommit 58910820c9f4ac37f6a9aa9933b7ba21d3f12113[m
+Merge: 77c76b9 0a6214f
+Author: CabelaoNakamura <hidekiarthur32@gmail.com>
+Date:   Tue Mar 15 01:10:28 2022 +0000
+
+    Merge branch 'main' of https://github.com/CabelaoNakamura/nikity-city
+
+[33mcommit 77c76b9c6df83d2ac633ffdc53c32f87cb779ac0[m
+Author: CabelaoNakamura <hidekiarthur32@gmail.com>
+Date:   Tue Mar 15 01:08:58 2022 +0000
+
+    tabela de preços mec editada
+
+[33mcommit 0a6214f133d6c7c49d053e2cd774ae1559ba3cea[m
+Author: Eric Nakamura <masaro.eric@gmail.com>
+Date:   Tue Mar 15 00:48:23 2022 +0000
+
+    +carros e correção de script
+
+[33mcommit 0027ed4ba26f9ac5c41ec3240457b33dd8ee61af[m
+Author: CabelaoNakamura <hidekiarthur32@gmail.com>
+Date:   Mon Mar 14 23:54:45 2022 +0000
+
+    +mapas para add
+
+[33mcommit 78460025de6eee018b96256f8fac486838c244b7[m
+Author: Eric Nakamura <masaro.eric@gmail.com>
+Date:   Mon Mar 14 03:48:54 2022 +0000
+
+    vai o restante
+
+[33mcommit 381ba3975810e83e0af426f53cdbd9c71fba821f[m
+Author: Eric Nakamura <masaro.eric@gmail.com>
+Date:   Mon Mar 14 03:40:17 2022 +0000
+
+    Update handling.meta
+
+[33mcommit 91f0478e6452f9d706e75048f444d7ae958e6251[m
+Author: Eric Nakamura <masaro.eric@gmail.com>
+Date:   Mon Mar 14 03:37:48 2022 +0000
+
+    Consertando cagada
+
+[33mcommit faa308d8f90bc8079deb6f2c1d7ea35410da3656[m
+Author: Eric Nakamura <masaro.eric@gmail.com>
+Date:   Mon Mar 14 03:02:24 2022 +0000
+
+    +Alguns carros
+
+[33mcommit 124b5d924b55a25604f4f0f24b2983d90d621b2f[m
+Merge: 157b097 f2cb315
+Author: Eric Nakamura <masaro.eric@gmail.com>
+Date:   Mon Mar 14 01:12:36 2022 +0000
+
+    Merge branch 'main' of https://github.com/CabelaoNakamura/nikity-city
+
+[33mcommit 157b0976648d68c8e76b1b735e28286ab7cf4bb5[m
+Author: Eric Nakamura <masaro.eric@gmail.com>
+Date:   Mon Mar 14 01:03:14 2022 +0000
+
+    NikityVehs
+    
+    +Mods movidos para pasta principal das streams(Talvez resolva o problema com os mods dos carros)
+    +Possível solução da raptor estar capotando
+
+[33mcommit f2cb315c16e0ece8a2bf2204b0d9fc82963e8405[m
+Author: CabelaoNakamura <hidekiarthur32@gmail.com>
+Date:   Mon Mar 14 00:59:37 2022 +0000
+
+    add cars
+
+[33mcommit 15b0b756d030514c38caf9e46ac23ea78a64036a[m
+Author: CabelaoNakamura <hidekiarthur32@gmail.com>
+Date:   Mon Mar 14 00:30:13 2022 +0000
+
+    correção
+
+[33mcommit 6df745630e237a7b98cea9c0368cd8a62ac1b18e[m
+Author: CabelaoNakamura <hidekiarthur32@gmail.com>
+Date:   Mon Mar 14 00:15:56 2022 +0000
+
+    cfg config
+
+[33mcommit a7905dbeb6525d4610d868e1dc968ef98acdba5b[m
+Author: CabelaoNakamura <hidekiarthur32@gmail.com>
+Date:   Mon Mar 14 00:14:45 2022 +0000
+
+    npc control
+
+[33mcommit 3eebdef3880232f6a4037e3474753ce9d3d00d1a[m
+Author: CabelaoNakamura <hidekiarthur32@gmail.com>
+Date:   Mon Mar 14 00:14:20 2022 +0000
+
+    sla
+
+[33mcommit 695e6c76720c6f16f18f8505fa6093b3c8500c06[m
+Author: EricNakamura <masaro.eric@gmail.com>
+Date:   Sun Jan 23 21:09:56 2022 +0000
+
+    sei la
+
+[33mcommit fb949c6c7a14daf74c0301fb9fac8197a78f006c[m
+Author: CabelaoNakamura <hidekiarthur32@gmail.com>
+Date:   Mon Dec 20 15:02:52 2021 +0000
+
+    sla tb
+
+[33mcommit ff0e2aea63f5f2325feb1199053371b809965217[m
+Author: CabelaoNakamura <hidekiarthur32@gmail.com>
+Date:   Sun Dec 19 22:23:39 2021 +0000
+
+    sla
+
+[33mcommit 99dd78c447e8a468c4ad6569cb9e9a460def2539[m
+Author: CabelaoNakamura <hidekiarthur32@gmail.com>
+Date:   Wed Dec 15 22:10:04 2021 +0000
+
+    readme and git attributes ajusts
+
+[33mcommit 8cc482ec204f784a107e15c3cfdee7006b1c2675[m
+Author: CabelaoNakamura <hidekiarthur32@gmail.com>
+Date:   Wed Dec 15 21:55:55 2021 +0000
+
+    first commit
+
+[33mcommit 85c5ba9cbf6141edfc368d2853cd2b814699240e[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Fri Jun 18 16:01:07 2021 -0300
+
+    Update config.lua
+
+[33mcommit d4069a8c850bc28b2372e4ce136f28c975cbfcd7[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Fri Jun 18 15:43:28 2021 -0300
+
+    Update init.lua
+
+[33mcommit 6c9abb3c098e003584662adadf304e8dca163263[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Fri Jun 18 15:42:20 2021 -0300
+
+    Removed weed
+    
+    Removed entire weed farm system.
+
+[33mcommit fa5bae8ef072cbd7c67737e154706d3fdbac4481[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Fri Jun 18 15:41:15 2021 -0300
+
+    Update client.lua
+
+[33mcommit dae3e2c71cf39c0c28e4994f8a19fa167710f647[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Fri Jun 18 15:35:06 2021 -0300
+
+    Inventory
+
+[33mcommit 7c4cbc89e13d56ab4f3c0b892c9da35119bb2268[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Fri Jun 18 12:52:08 2021 -0300
+
+    New artifact
+
+[33mcommit 5137fc0d0e06345b6ee4c9e0fd36356eed713790[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Fri Jun 11 16:27:19 2021 -0300
+
+    Update
+
+[33mcommit b4c897972f6d2bb6b4f64952bf09974ff63bd1ba[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Fri Jun 11 16:02:39 2021 -0300
+
+    Update
+
+[33mcommit d2061918ca8c6851addf670aaf6d72d455667a22[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu Jun 10 13:45:56 2021 -0300
+
+    New spawn
+
+[33mcommit b6e48d0970891e389a4172a2c0212337a2b0feae[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Wed Jun 9 16:53:42 2021 -0300
+
+    Update
+
+[33mcommit 7c047dd860865fef3e0037ac81c210e7e21c4c09[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Wed Jun 9 15:49:04 2021 -0300
+
+    Update
+
+[33mcommit 67173dff9fa4aa73bfff4442e7862a36481fde19[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Wed Jun 9 15:31:49 2021 -0300
+
+    Update
+
+[33mcommit ef1ec835e707bbefa0cbe8fed872cba07dd673c0[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Wed Jun 9 14:10:44 2021 -0300
+
+    Hayes mechanic
+    
+    New map/proxyinterior
+
+[33mcommit 597919e149677e5d5949f45dab300103469cfacc[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Wed Jun 9 01:37:17 2021 -0300
+
+    Update
+
+[33mcommit a96f0127bf2427e4ecd7f696b1d8a5e049ce6fcb[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Mon Jun 7 00:10:27 2021 -0300
+
+    Build update
+
+[33mcommit 198d1443b4eb7e31a6ea5b4d8a5a981b60a9ca40[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Sun Jun 6 13:19:14 2021 -0300
+
+    Karting race map
+
+[33mcommit 35d101efca6c2c3d5023d54f62da3fabf2df51b1[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Sun Jun 6 12:39:55 2021 -0300
+
+    Update interiorproxies.meta
+
+[33mcommit cc0b41fe8ece44f0c1563bb644f7179fc962ae84[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Sun Jun 6 12:08:09 2021 -0300
+
+    Update
+
+[33mcommit a212e153da3461c25caf02f792c52768c37f3b85[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Sun Jun 6 11:50:09 2021 -0300
+
+    Update
+
+[33mcommit 33c39dad956dc6b6df4838a487c4b2b70c6bf2de[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Sun Jun 6 03:48:12 2021 -0300
+
+    Update
+
+[33mcommit 44ad5dda217cd45c52c31bec0eed79fb2bfe034f[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Sat Jun 5 00:44:04 2021 -0300
+
+    Update client.lua
+
+[33mcommit 897a93ec3b6dcc90b111e0730550d67acfa23376[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Fri Jun 4 23:14:15 2021 -0300
+
+    Update
+
+[33mcommit ee1766330f64b6684a568b2c87713007125cda25[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Fri Jun 4 23:10:12 2021 -0300
+
+    Updates
+
+[33mcommit 3707c7ac0f551ac84de1a51ab7eb97f756d25e0b[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu Jun 3 15:00:01 2021 -0300
+
+    Update script.js
+
+[33mcommit 080cc569e12a5d640c7476f2b1a6feabdf59d293[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu Jun 3 14:56:13 2021 -0300
+
+    Update server.png
+
+[33mcommit eb720fcc6a46b84b8e7c5b2282c602c6dfa2e37a[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu Jun 3 14:29:33 2021 -0300
+
+    Update resources.cfg
+
+[33mcommit ad8a54d2ef637240db2b289144049cdaf076d0a0[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu Jun 3 14:28:54 2021 -0300
+
+    Update
+
+[33mcommit 50559453157c1e0ac4ff3255d8e7d13862c21609[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu Jun 3 13:57:02 2021 -0300
+
+    Maps
+
+[33mcommit fb25a126a9355aff3d18586b1630725cf4946afb[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu Jun 3 13:56:56 2021 -0300
+
+    Update client.lua
+
+[33mcommit 0549c9c4eaa3e40f301e475c7adae7b94395df7e[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu Jun 3 13:56:49 2021 -0300
+
+    Update server.lua
+
+[33mcommit ea5d5f81816cbf25a622fd711d404df980dd347a[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu Jun 3 13:56:43 2021 -0300
+
+    Garbageman update
+    
+    Function for verify news paper boxes
+
+[33mcommit 7f32eb6f2f3ac7de87cdf2ba9baf0b2907fac4ea[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu Jun 3 13:56:20 2021 -0300
+
+    Update garages.lua
+    
+    Added Karts
+
+[33mcommit c4d69c1bada02c3bce5a062f85be820d8b749c3d[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu Jun 3 13:56:09 2021 -0300
+
+    Update lscustoms.lua
+    
+    Fixed camera bug
+
+[33mcommit aa44a8583168d3645304c86f444a2b0703e307d4[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu Jun 3 00:21:46 2021 -0300
+
+    Update
+
+[33mcommit 7c238c2406a784190336c3efdf498e12effe4db4[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Wed Jun 2 20:47:53 2021 -0300
+
+    Update index.html
+
+[33mcommit 8e59d30a9053a8f1e9a072d1ca841b00308076e7[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Wed Jun 2 18:28:32 2021 -0300
+
+    Update server.lua
+
+[33mcommit ae27a33e13b393bbeef0f1757bf0d5699ef6cddf[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Wed Jun 2 18:27:56 2021 -0300
+
+    Update
+
+[33mcommit 91b066aacbd4008f336f8d9d92492ca650aafb2d[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Wed Jun 2 13:59:53 2021 -0300
+
+    Update
+
+[33mcommit 96a0956bdf44b5187a7e83bfef47390861c0c5a3[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Wed Jun 2 13:34:03 2021 -0300
+
+    Update
+
+[33mcommit 34f6a23449f51491a089a297f200e12958c415c4[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Wed Jun 2 12:42:11 2021 -0300
+
+    Update
+
+[33mcommit b57338cfd7fc993d4b095b5aa1367ff39ab1e5a7[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Wed Jun 2 12:40:37 2021 -0300
+
+    Update server.lua
+
+[33mcommit c147bc807694c6cde3bc9630210356f4ed382263[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Wed Jun 2 12:40:34 2021 -0300
+
+    Update main.lua
+
+[33mcommit d6cd798aa7baee65100b2ef6274c39f3e29d5586[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Wed Jun 2 12:34:39 2021 -0300
+
+    Update
+
+[33mcommit 51d6ad3814d9560df882aac410dee33f4ab25267[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Tue Jun 1 18:29:23 2021 -0300
+
+    Update
+
+[33mcommit 3baa84f51c4cd256ce6aa2a74ac1d9cd7209e22b[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Tue Jun 1 14:45:33 2021 -0300
+
+    Update
+
+[33mcommit bb5d09bb6a7cc3c0ae5e08a03449b462d8f0dd17[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Tue Jun 1 03:56:00 2021 -0300
+
+    Update client.lua
+
+[33mcommit b423ca30c089ba415e96d50da072c00a992fd5cb[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Tue Jun 1 03:08:00 2021 -0300
+
+    Update
+    
+    Build 4007
+
+[33mcommit c31e694a54d4637567a0bc7263eec4d1efd3049b[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Tue Jun 1 01:51:11 2021 -0300
+
+    Update
+
+[33mcommit bee610698cbc015bea4c300348809cffd5dcd20c[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Mon May 31 23:15:43 2021 -0300
+
+    Update
+
+[33mcommit 0c8590808c9cf3c50c0ff1317376c78b32e1efb2[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Sun May 30 16:01:39 2021 -0300
+
+    Player
+    
+    Wins/Doors working on Dynamic menu
+
+[33mcommit 842e9f74067f3a52ed72990eb0229294eac56080[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Sun May 30 16:01:18 2021 -0300
+
+    Update client.lua
+
+[33mcommit 2cead78c9ffbc806ea59a7d579655b23965d4917[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Sun May 30 16:01:05 2021 -0300
+
+    Dynamic
+
+[33mcommit 7e43038c80df2f85d1a14e750ea9fd5bb0c3beea[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Sun May 30 16:00:56 2021 -0300
+
+    rebolar
+
+[33mcommit 759d7c95685016a9e58fea5b9d9684e9cba99661[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Sun May 30 16:00:50 2021 -0300
+
+    Ney command
+
+[33mcommit 31b0e680045f251679af1232fc34c118928b2c16[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Sun May 30 16:00:42 2021 -0300
+
+    Update server.lua
+
+[33mcommit 28f34bc89b500ee37aa11684b12c571057516e36[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Sun May 30 14:15:33 2021 -0300
+
+    Update inventory.lua
+
+[33mcommit a28f59404e0dbc3d2ed5509e22dd5ab80022b202[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Sun May 30 14:15:29 2021 -0300
+
+    HUD
+
+[33mcommit 2d612ed4417ce3a6a91b5b79bded9da777075f26[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Sun May 30 14:15:23 2021 -0300
+
+    New race
+
+[33mcommit ad1f3350e0743d57d1d6eb65ab2f9e570970d8c6[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Sun May 30 14:15:13 2021 -0300
+
+    Update utils.lua
+
+[33mcommit ce7ca91b470a7a529d2f8897030e3ce23569945e[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Sun May 30 14:15:06 2021 -0300
+
+    Update client.lua
+
+[33mcommit 53e94a317edafcfd21598e9536f38c55bc56c122[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Sun May 30 14:15:03 2021 -0300
+
+    Update fxmanifest.lua
+
+[33mcommit 0e8d483fa74fc26e1bb26e87681615eb166ec091[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Sun May 30 12:15:08 2021 -0300
+
+    Update creative.sql
+
+[33mcommit 6873ba4debbc5801134cc5de6ac0f9b01fd54b27[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Sat May 29 16:49:47 2021 -0300
+
+    Update garages.lua
+    
+    Changing prices and trunk space's
+
+[33mcommit 2467229c005012233b7bd7d93d5da2ca7b682a6b[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Sat May 29 16:24:10 2021 -0300
+
+    dynamic
+
+[33mcommit 5de7812918e456747743cf3a9d82198f5b5df64c[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Sat May 29 16:24:01 2021 -0300
+
+    Need verify vrp lib utils
+    
+    deleted end(idk why)
+
+[33mcommit 85271dddb768dde6c17e10547f9ec82f4d66265f[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Sat May 29 16:22:05 2021 -0300
+
+    Hud
+
+[33mcommit 7535272ec27573b77ed9f2e104a101be93e1c5c9[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Sat May 29 16:21:32 2021 -0300
+
+    Need try too
+    
+    ObjToNet to NetworkGetNetworkIdFromEntity and if GetEntityHealth(ped) > 101 and not celular and not cancelando then
+
+[33mcommit cfb592a393ea5286cb67bd15e0dea745b4a7edca[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Sat May 29 16:21:00 2021 -0300
+
+    Update garages.lua
+
+[33mcommit e72dd5f59cd4ba7cac494f9948c036bd12ad6d56[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Sat May 29 16:20:53 2021 -0300
+
+    Need verify
+    
+    Removed lines:
+    
+    local ped = PlayerPedId()
+    DisableControlAction(1,16,true)
+    DisableControlAction(1,17,true)
+
+[33mcommit eea8023745bdb5ef04019fc2c9cd4c6066d8220c[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Fri May 28 15:06:22 2021 -0300
+
+    Shitty
+    
+    Removed
+
+[33mcommit 9bbdd8b7e11a40afb3b25c7a950527f5e4d11ef1[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Fri May 28 15:04:26 2021 -0300
+
+    Update
+    
+    Changed some keybinds
+
+[33mcommit eb67670cbfbdc2e5f0a11e48ea8d7e3de8c8e9d8[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Fri May 28 04:15:32 2021 -0300
+
+    Update
+    
+    Target benefactor, removed other player folder, updated garage, added vehmenu and hunting job.
+
+[33mcommit 9ea0b8bbaea2254540877cbfc7034d9dcb13d567[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 27 19:37:35 2021 -0300
+
+    Update
+
+[33mcommit d5db7c3a6a6ffc724ffaef9ecd6704044a70301e[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 27 19:02:35 2021 -0300
+
+    Build
+    
+    4000
+
+[33mcommit f1c34bcfdda2545a9129736f34bca439b561a7de[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 27 19:01:42 2021 -0300
+
+    Build
+
+[33mcommit 04bf31f040b133623a6d88fa74cde6e2f33e5737[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 27 18:30:02 2021 -0300
+
+    Update
+
+[33mcommit e5d16b012e2d610b56cd5c8fc6ef0a683b01588d[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 27 03:59:35 2021 -0300
+
+    Races
+    
+    Finally sqls working
+
+[33mcommit 62514b149ba356836a06510fbd2cba142b58c090[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 27 01:57:22 2021 -0300
+
+    Update README.md
+
+[33mcommit 145868fddba78c6cfdb296892b465e6b2491f871[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 27 01:56:04 2021 -0300
+
+    Update
+    
+    Tattoos, jail, animations, vrp
+
+[33mcommit 49bb2ab5b2ce2f49212fd6e398c07182c7ccf688[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Wed May 26 02:50:03 2021 -0300
+
+    Prison update
+
+[33mcommit e615d14589cdbbdd4ba5dd2d7f8cb2a366393ac9[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Wed May 26 02:49:52 2021 -0300
+
+    Mining job
+
+[33mcommit eebffdcf728a1d30d8c8a66f2ff26cf3de58664a[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Tue May 25 23:59:45 2021 -0300
+
+    Robberys update
+
+[33mcommit 7de910f0e8ff4bfeb1d0eb290170af5eb8cfcc16[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Tue May 25 19:51:45 2021 -0300
+
+    Barbershop client
+
+[33mcommit e0904ef0eb84940b49464e2c67ec432bb06d447e[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Tue May 25 19:45:43 2021 -0300
+
+    Update
+
+[33mcommit 230f52f8da22832a2713fb3d3a18fbae1fbe2388[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Mon May 24 13:47:12 2021 -0300
+
+    Update
+    
+    The famous original files
+
+[33mcommit 3b1b5f1f145bba0a81bbd87a9aed695e6cdf44b9[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Mon May 24 03:58:49 2021 -0300
+
+    Update
+
+[33mcommit f989aeb1ff683972db9446f9f0bbd54897d49f6c[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Fri May 21 03:44:41 2021 -0300
+
+    Update
+
+[33mcommit 300e048c23701fbea7ec970eb2f78fe4dd454483[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Fri May 21 01:54:05 2021 -0300
+
+    Update
+
+[33mcommit 2121f784da4cdcb4aa03ff864f4ddee5240eacf2[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 20 23:35:48 2021 -0300
+
+    Update
+
+[33mcommit 2f0df192b1065b4d36ce7fbeb10ad570210c5049[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 20 16:31:34 2021 -0300
+
+    Organization
+
+[33mcommit e643b2c16b958e1b51ee67a3a3c8179e53a6eb35[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 20 16:26:47 2021 -0300
+
+    Updates
+    
+    Removed other bennys and impound (=()
+    Removed some shitty codes
+    New hud system (finally)
+    Removed blockmaps
+    Added default hospital(to block hole)
+
+[33mcommit cef362b92e8f45473493d673317c570687cae129[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 20 04:08:07 2021 -0300
+
+    Update
+
+[33mcommit a3634b31faf6e6bc8318122a271e89bb35b92310[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Wed May 19 22:00:08 2021 -0300
+
+    Update
+
+[33mcommit 358bb1324b077aa3d9775657d653a98b7ff5769e[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Wed May 19 17:32:07 2021 -0300
+
+    Update
+
+[33mcommit 0f437460a91cb148d8bddbcefc22e5ad995974ba[m
+Author: fedeera <83890359+fedeera@users.noreply.github.com>
+Date:   Tue May 18 22:15:54 2021 -0300
+
+    Update README.md
+
+[33mcommit 838da042de0553e37b5278c05949c2accad6ed5a[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Tue May 18 23:13:48 2021 -0300
+
+    Update
+
+[33mcommit b8ff9ad9f8103fde832cd0cf9b96f183da6a43ca[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Mon May 17 16:27:00 2021 -0300
+
+    Big rename
+
+[33mcommit b136286b502475c5b1d5c83a0c74a8b417c8711b[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Fri May 14 16:15:19 2021 -0300
+
+    New build 3945
+
+[33mcommit 275499c87519a27ccb3e2a47338b4a793a296564[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Fri May 14 16:09:05 2021 -0300
+
+    New loading screen
+
+[33mcommit 94955e96355f91e712521ddd3b04745285e5343c[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Fri May 14 15:49:42 2021 -0300
+
+    Update server.cfg
+
+[33mcommit 9cfefdaf98c7afb94d4f166d37623d886250965a[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Fri May 14 15:46:42 2021 -0300
+
+    Big update
+
+[33mcommit ffed86fe7af9bf7cbd77fd48ed4022180e143517[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 15:42:23 2021 -0300
+
+    Massive update
+    
+    Need check all, pls.
+
+[33mcommit b7321d16765efe001eee3e160f383f88490c66be[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 15:41:49 2021 -0300
+
+    notifys Update
+
+[33mcommit 80a1121f9c0551f584b0bd653a50215c3cda5d84[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 15:41:30 2021 -0300
+
+    notifycall Update
+
+[33mcommit 27cc84b1a15920baab0e6a4f36f83787a82e9b11[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 15:41:18 2021 -0300
+
+    inventory Update
+
+[33mcommit 00dd08a56370a0f9afa6cb0426c8bf9ae2b4517f[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 15:41:00 2021 -0300
+
+    inventory Update
+
+[33mcommit 978b253d25fd73b555b0becf2c6899259d6c9156[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 15:40:13 2021 -0300
+
+    inventory Update
+
+[33mcommit 4bddea50603dfd47224ab9a73b2440a515c52217[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 15:39:47 2021 -0300
+
+    hud Update
+
+[33mcommit 18f83d76f33f1d414c3c3b973bb2426acc3ba482[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 15:39:18 2021 -0300
+
+    garages Update
+
+[33mcommit adda6f053e221530b300cad8e885a12263e2136a[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 15:38:59 2021 -0300
+
+    Update client.lua
+
+[33mcommit 428f86297acdd273aaaa928a3a66810b78aa1755[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 15:38:53 2021 -0300
+
+    Update server.lua
+
+[33mcommit a81ddd18bdcd0f5959aa3d53904d7d14fb83c0c6[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 15:38:44 2021 -0300
+
+    Update server.lua
+
+[33mcommit 601bee38c4d2f60e3c94aedacdcb3f827ebb77b0[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 00:51:57 2021 -0300
+
+    vrp_atm Update
+    
+    Removed /atm command, now need Press E to open, and some new atm's are added.
+
+[33mcommit d75b42450c374c265f98972803998daf86f9142c[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 00:51:28 2021 -0300
+
+    vrp_checkin Update
+    
+    Anti-flood added
+
+[33mcommit 9acc54532d70c7467b4fef39a1a77af959cc52e0[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 00:50:36 2021 -0300
+
+    vrp_chest Update
+    
+    Removed some non stockable items
+
+[33mcommit 440b8ee8c3112551a73a61f165f73f3d88a32754[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 00:50:15 2021 -0300
+
+    vrp_crafting Update
+    
+    Avalanches crafting
+
+[33mcommit f788b1c16cdc8e39957a41ec1201235b24e750c9[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 00:49:51 2021 -0300
+
+    vrp_admin Update
+
+[33mcommit 283151f3fe430c3da3f8d9a6c4a350c8beeeb56a[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 00:49:35 2021 -0300
+
+    raceillegal Updated
+    
+    New race added(rampage)
+
+[33mcommit c2d7a2d0fe977a461387223d52d497c3339c86e0[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 00:48:17 2021 -0300
+
+    vrp_delivery Update
+    
+    Removed old items
+
+[33mcommit 925b510a51b093f75d6e4b47a42594e03ea26712[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 00:48:04 2021 -0300
+
+    foodfarm Added
+    
+    Avalanches job
+
+[33mcommit 580ec5979c42b07ffd87713e0612c26f9dd79ec6[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 00:47:41 2021 -0300
+
+    Create burrito2.ytd
+
+[33mcommit 0a5254aa22fab3a6b5fc350d45087655d9348973[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 00:47:34 2021 -0300
+
+    vrp_engine Update
+    
+    Some changes
+
+[33mcommit 854067698e0b2c55ec716dda79f0d94e7a1d9f2a[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 00:47:17 2021 -0300
+
+    vrp_garages Update
+    
+    New garage(Avalanches)
+
+[33mcommit 9823b0d67faa2f4210bc481f6d108766b8d51915[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 00:47:00 2021 -0300
+
+    vrp_homes Update
+    
+    Removed some non-stockable items.
+
+[33mcommit 50b7cedaa3cdf2e3835baf25bcd4034fa36b38f5[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 00:46:39 2021 -0300
+
+    vrp_hud Update
+    
+    New hunger/thirst system.
+
+[33mcommit 432dffad0d8aa7ff23ce599543c9ed2efb30188c[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 00:46:22 2021 -0300
+
+    vrp_inventory Updated
+    
+    New guns and items(with new functions)
+
+[33mcommit da0c083a4145b9fd897e792e277eaa098b7e2cb2[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 00:46:01 2021 -0300
+
+    vrp_player Update
+    
+    New guns added
+
+[33mcommit c622bd74125edb622b221dbfa76c2a20a3cd4e32[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 00:45:40 2021 -0300
+
+    doors Update
+    
+    Updating some missing vrp_doors
+
+[33mcommit d5a8d424e0fa923c4aee5b4b0e7b9131c40cb184[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 00:44:44 2021 -0300
+
+    doors Added
+    
+    Old vrp_doors
+
+[33mcommit bf82486b02d6cff91e6d90915cd9e2290d68a3ab[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 00:44:20 2021 -0300
+
+    vrp_shops Update
+    
+    New items and new shops.
+
+[33mcommit 2fffb7e094d9f087094935297391144f67db168e[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 00:43:37 2021 -0300
+
+    vrp_skinshop Update
+    
+    Changed drawtext and moved Hospital clothingshop
+
+[33mcommit 27ef27a8dbcd7ee88e2c54349a3944f71ffe5553[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 00:43:11 2021 -0300
+
+    vrp_trunkchest Update
+    
+    Removed some items
+
+[33mcommit 42e3d1c1e85823d9c07705e9a98c32891cbf3f5d[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 00:42:51 2021 -0300
+
+    vrp Update
+    
+    New guns, new hunder/thirst system, new items for food craft and bad foods, and new garage.
+
+[33mcommit 9be56a73312a5132e304ba05179cfc3e4c0e2e5f[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 00:41:31 2021 -0300
+
+    Update server.cfg
+
+[33mcommit 78e6e2de45ad6ac14fc7c81f3b721e7319ae3871[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 00:41:21 2021 -0300
+
+    Update base.lua
+
+[33mcommit 0b56dde18c49007caa7eaf7de401fab7a393cc10[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 00:41:14 2021 -0300
+
+    wall Added
+    
+    Old vrp_ids
+
+[33mcommit 11ac91648ea193347ba39aea99beb67200fa8730[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 00:40:57 2021 -0300
+
+    Update client.lua
+
+[33mcommit 76f4dbd9f41770e83563ca233069f51f51ffb7a8[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Thu May 13 00:40:37 2021 -0300
+
+    Moved, Removed or Changed
+
+[33mcommit 3bbf18027ef08e975ae9fe4a23272b6bba8b65dd[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Wed May 12 01:26:02 2021 -0300
+
+    vrp_survival Update
+    
+    New notifys
+
+[33mcommit 88f3c378f930e4635b870afed1d13e3ef3fa67a4[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Wed May 12 01:25:43 2021 -0300
+
+    Update style.css
+    
+    New notify styles
+
+[33mcommit 0367273631d2559cea7e26d12940313e5c07da4c[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Wed May 12 01:25:29 2021 -0300
+
+    vrp_checkin Update
+    
+    Redo for new hospital St. Fiacre
+
+[33mcommit 622873c5ee0a808a24c72f51550db6a660a936f5[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Wed May 12 01:25:04 2021 -0300
+
+    Update client.lua
+    
+    vrp_animacoes
+
+[33mcommit 9466b933035799bbff78d4da2b3addd17666b12a[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Tue May 11 15:38:32 2021 -0300
+
+    New codes(vrp_creative)
+
+[33mcommit 5f7d071efe127c7a21383a403c4d3833e33ac009[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Tue May 11 15:38:15 2021 -0300
+
+    vrp_animacoes Updated
+    
+    Nothing change i think.
+
+[33mcommit 968a2a9419e58facb4beef4789dceac1aa2e7c0e[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Tue May 11 15:37:49 2021 -0300
+
+    Moved, Removed or Changed
+
+[33mcommit 80b322f032e9be1f65d853edde575cc6c63da95d[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Tue May 11 15:37:17 2021 -0300
+
+    Water race added
+
+[33mcommit 220423321307f914e6a69986a5d1746e15f5a453[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Tue May 11 15:36:51 2021 -0300
+
+    Illegal race added
+
+[33mcommit 66d500a0a3a95a13d5c3d7ab8123833bd598a1c1[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Tue May 11 15:36:26 2021 -0300
+
+    gabzAvalanches Update
+
+[33mcommit 0ef10b16172efc2313e0ba9d271ae9a7927ca374[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Tue May 11 15:36:08 2021 -0300
+
+    gabzAvalanches Moved
+    
+    Now we put avalanches map into creativeMaps folder
+
+[33mcommit 43b08209337b31ddf3f7e021a5538aef794f6508[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Tue May 11 15:35:08 2021 -0300
+
+    vrp_garbageman Updated
+    
+    Now we verify the backpack space available and now have animation to search items on trashs.
+
+[33mcommit 6ce268092696bbd2029cf22c846e3b721b99a4f5[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Tue May 11 15:34:28 2021 -0300
+
+    foodfarm Added
+    
+    Job to catch items to craft foods(under construction).
+
+[33mcommit 4a5c5c2516d26731f8de3175cd0a6da9255874f6[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Tue May 11 15:34:00 2021 -0300
+
+    Moved, Removed or Changed
+
+[33mcommit ac033020ca05f0d7111fdc3ca984f003ba8ee5b3[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Tue May 11 15:32:23 2021 -0300
+
+    Update server.cfg
+
+[33mcommit 19e08fe3e1b429f82b13f34d06577dc4e684a6b2[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Tue May 11 13:24:46 2021 -0300
+
+    Update __resource.lua
+
+[33mcommit 8252d7e3d94fd2999347b18f8d2c345209c9c17d[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Tue May 11 02:50:23 2021 -0300
+
+    vrp_player Update
+    
+    Removed taxi job and added mechanic job and the call function.
+
+[33mcommit 38b448e4251039a1354d744c6ae3178914913495[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Tue May 11 02:49:55 2021 -0300
+
+    Update server.lua
+    
+    Removed /diagnostico command.
+
+[33mcommit 72f31c7e883b30bc041a7ceea46cc066c8b0ba81[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Tue May 11 02:49:36 2021 -0300
+
+    vrp_creative Added
+    
+    Here is!
+
+[33mcommit e323acca866486f8931b257c657cc03a79e232c5[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Tue May 11 02:49:05 2021 -0300
+
+    vrp_codes Removed
+    
+    We renamed this folder to vrp_creative, check above;
+
+[33mcommit 98218638ace105402b671df9a17e73c99e7297f0[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Tue May 11 02:48:35 2021 -0300
+
+    vrp_call Removed
+    
+    This dont work and we dont use this anymore.
+
+[33mcommit 584f378dfb105e982ad9a2d89ffcb4cfe2de52cc[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Tue May 11 02:48:06 2021 -0300
+
+    vrp_shops Update
+    
+    New css added
+
+[33mcommit cd6d0a95c7dd89f6e740934c0fcccf278aa17bf6[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Tue May 11 02:47:38 2021 -0300
+
+    group.lua Update
+    
+    Removed taxi job and added mechanic.
+
+[33mcommit cda03c269c43bf90d0f4090c50df29a6156cd11b[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Tue May 11 02:47:15 2021 -0300
+
+    vrp_spawn Update
+    
+    New ui and informations
+
+[33mcommit ba36558d72df889dcbb5efe07c41e21cf422284f[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Mon May 10 14:00:45 2021 -0300
+
+    vrp_races Update
+    
+    Now you need raceticket Item and when you start the illegal race, the police was warned about.
+
+[33mcommit b79f82e04c2b8f332f21ff6e2ce1b9e35610c56f[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Mon May 10 13:59:39 2021 -0300
+
+    vrp_inventory Update
+    
+    Less width and removed some user informations(now you can see on Tablet[Press F9])
+
+[33mcommit 872bff70b44a3b3aee48b99d8c74007f876d5649[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Mon May 10 13:58:55 2021 -0300
+
+    vrp_shops Update
+    
+    Work time added, new shops added, prop when open added.
+
+[33mcommit a82677d37963b680da55aab683ee6788aa4ee23e[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Mon May 10 13:58:09 2021 -0300
+
+    Added inventory backup
+    
+    Original files
+
+[33mcommit 881f8b8afa319b77831e7f7c906f7b94b0baad15[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Mon May 10 11:54:31 2021 -0300
+
+    Reconfig start.bat
+    
+    Reconfiguration for default database name[creative].
+
+[33mcommit c464ce528d7e0d4b2e3e4c69eab97c2da35e3d5d[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Mon May 10 11:49:10 2021 -0300
+
+    Database
+    
+    Create one database called Creative and import creativesql.sql file.
+
+[33mcommit 853c3d65def36e85b19546d9c0db498d30388ef0[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Mon May 10 11:48:31 2021 -0300
+
+    Artifact 3925
+    
+    10/05/2021 11:47 am
+
+[33mcommit 8a499cd58896e19a9b12a2622e6029d7c5d8d809[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Mon May 10 11:20:14 2021 -0300
+
+    Folder organization
+    
+    Renames and organization.
+
+[33mcommit f10bcda4ea9dfcf54a6732b0ca8409eff914d2f2[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Sun May 9 03:45:15 2021 -0300
+
+    Fixed inventory
+    
+    Close and Update inventory after some actions
+
+[33mcommit 02c1a98764797320f68ca2ba4f6d55fdac24b50f[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Sun May 9 03:44:33 2021 -0300
+
+    Deleted
+    
+    Deleted old inventoryold/new
+
+[33mcommit 8adb385685b2179d9cf427684c1f707c7e16ab65[m
+Author: OiSouHen <oisouhen@gmail.com>
+Date:   Sat May 8 18:45:14 2021 -0300
+
+    Creative
+
+[33mcommit 223b1b64122a8265966bedd2adb19b289e077032[m
+Author: Lucas Hen <oisouhen@gmail.com>
+Date:   Fri May 7 15:14:33 2021 -0300
+
+    Initial commit
