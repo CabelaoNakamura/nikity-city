@@ -3,13 +3,13 @@ game "gta5"
 
 this_is_a_map "yes"
 
-files {
+files { 
 	"stream/**",
 	"stream/*/**",
 	"stream/*/*/**",
 	"stream/*/*/*/**",
-	"stream/minimap.gfx"
-	"stream/hud_reticle.gfx"
+	"stream/minimap.gfx",
+	"stream/hud_reticle.gfx",
 	"interiorproxies.meta"
 }
 

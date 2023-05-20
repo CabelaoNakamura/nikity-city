@@ -1,1 +1,287 @@
-const REQ_TIMEOUT_SHORT=1500,REQ_TIMEOUT_MEDIUM=5e3,REQ_TIMEOUT_LONG=9e3,STATUS_REFRESH_INTERVAL=isWebInterface?1e3:5e3,SPINNER_HTML='<div class="txSpinner">Loading...</div>',anyUndefined=(...e)=>[...e].some((e=>void 0===e)),xss=e=>{let t=document.createElement("div");return t.innerText=e,t.innerHTML};document.addEventListener("DOMContentLoaded",(function(e){void 0!==$.notifyDefaults&&$.notifyDefaults({z_index:2e3,mouse_over:"pause",placement:{align:"center"},offset:{y:64}}),"undefined"!=typeof jconfirm&&(jconfirm.defaults={title:"Confirm:",draggable:!1,escapeKey:!0,closeIcon:!0,backgroundDismiss:!0,typeAnimated:!1,animation:"scale",type:"red",boxWidth:"500px",useBootstrap:!1,theme:document.body.classList.contains("theme--dark")?"dark":"light"})}));const pfpList=document.getElementsByClassName("profile-pic");for(let e of pfpList)e.addEventListener("error",(()=>{"img/default_avatar.png"!=e.src&&(e.src="img/default_avatar.png")}));const checkDoLogoutRefresh=e=>!0===e.logout?(window.location="/auth?logout",!0):!0===e.refresh&&(window.location.reload(!0),!0),txAdminAPI=({type:e,url:t,data:o,dataType:n,timeout:i,success:d,error:a})=>!anyUndefined(e,t)&&(t=TX_BASE_PATH+t,i=i||5e3,d=d||(()=>{}),a=a||(()=>{}),$.ajax({type:e,url:t,timeout:i,data:o,dataType:n,success:d,error:a})),txAdminConfirm=({content:e,confirmBtnClass:t,modalColor:o,title:n})=>new Promise(((i,d)=>{$.confirm({title:n,content:e,type:o||"red",buttons:{cancel:()=>{i(!1)},confirm:{btnClass:t||"btn-red",keys:["enter"],action:()=>{i(!0)}}},onClose:()=>{i(!1)}})})),txAdminPrompt=({confirmBtnClass:e,modalColor:t,title:o,description:n,placeholder:i})=>new Promise(((d,a)=>{$.confirm({title:o,type:t||"green",content:`\n                <form action="">\n                    <div class="form-group">\n                        <label>${n}</label>\n                        <input type="text" placeholder="${i}" class="inputField form-control" required />\n                    </div>\n                </form>`,buttons:{cancel:()=>{d(!1)},formSubmit:{text:"Submit",btnClass:e||"btn-green",action:function(){d(this.$content.find(".inputField").val())}}},onClose:()=>{d(!1)},onContentReady:function(){var e=this;this.$content.find("form").on("submit",(function(t){t.preventDefault(),e.$$formSubmit.trigger("click")}))}})}));!function(){if(!isWebInterface)return;if(null===document.cookie.match(/(^| )txAdmin-darkMode=([^;]+)/))if(console.log("no theme cookie found"),window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)console.log("OS dark mode detected"),document.body.classList.toggle("theme--dark"),document.cookie="txAdmin-darkMode=true;path=/";else if("/"==window.location.pathname){const e=864e5;if(null===document.cookie.match(/(^| )txAdmin-darkModeSuggestion=([^;]+)/)){const t=new Date;t.setTime(t.getTime()+e);const o=document.getElementById("darkToggleArea"),n=new coreui.Tooltip(o,{container:"body",boundary:"window",offset:function(e){return[0,e.popper.height/3]}});setTimeout((()=>{n.show(),document.cookie=`txAdmin-darkModeSuggestion=true;expires=${t.toUTCString()};path=/`}),2e3)}}const e="d-none";let t=document.body.classList.contains("theme--dark");const o=document.getElementById("darkToggleDark"),n=document.getElementById("darkToggleLight");o.classList.toggle(e,t),n.classList.toggle(e,!t);const i=function(){document.body.classList.toggle("theme--dark"),o.classList.toggle(e),n.classList.toggle(e),t=!t,document.cookie=`txAdmin-darkMode=${t};path=/`};o.addEventListener("click",i),n.addEventListener("click",i)}();
+/* eslint-disable no-unused-vars */
+//================================================================
+//============================================= Settings & Helpers
+//================================================================
+//Settings & constants
+const REQ_TIMEOUT_SHORT = 1500;
+const REQ_TIMEOUT_MEDIUM = 5000;
+const REQ_TIMEOUT_LONG = 9000;
+const REQ_TIMEOUT_REALLY_LONG = 13000;
+const STATUS_REFRESH_INTERVAL = (isWebInterface) ? 1000 : 5000;
+const SPINNER_HTML = '<div class="txSpinner">Loading...</div>';
+
+//Helpers
+const anyUndefined = (...args) => { return [...args].some((x) => (typeof x === 'undefined')); };
+const xss = (x) => {
+    let tmp = document.createElement('div');
+    tmp.innerText = x;
+    return tmp.innerHTML;
+};
+const convertMarkdown = (input, inline = false) => {
+    const toConvert = xss(input)
+        .replaceAll(/\n/g, '  \n')
+        .replaceAll(/\t/g, '&emsp;');
+    const markedOptions = {
+        breaks: true,
+    };
+    const func = inline ? marked.parseInline : marked.parse;
+    return func(toConvert, markedOptions)
+        .replaceAll('&amp;lt;', '&lt;')
+        .replaceAll('&amp;gt;', '&gt;');
+};
+
+//================================================================
+//================================================= Event Handlers
+//================================================================
+//Page load
+document.addEventListener('DOMContentLoaded', function(event) {
+    if (typeof $.notifyDefaults !== 'undefined') {
+        $.notifyDefaults({
+            z_index: 2000,
+            mouse_over: 'pause',
+            placement: {
+                align: 'center',
+            },
+            offset: {
+                y: 64,
+            },
+        });
+    }
+
+    if (typeof jconfirm !== 'undefined') {
+        jconfirm.defaults = {
+            title: 'Confirm:',
+
+            draggable: false,
+            escapeKey: true,
+            closeIcon: true,
+            backgroundDismiss: true,
+
+            typeAnimated: false,
+            animation: 'scale',
+
+            type: 'red',
+            columnClass: 'medium',
+            theme: document.body.classList.contains('theme--dark') ? 'dark' : 'light',
+        };
+    }
+});
+
+//Handle profile picture load error
+const pfpList = document.getElementsByClassName('profile-pic');
+for (let pfp of pfpList) {
+    pfp.addEventListener('error', () => {
+        if (pfp.src != 'img/default_avatar.png') {
+            pfp.src = 'img/default_avatar.png';
+        }
+    });
+}
+
+
+//================================================================
+//================================================= Helper funcs
+//================================================================
+const checkApiLogoutRefresh = (data) => {
+    if (data.logout === true) {
+        window.location = `/auth?logout&r=${encodeURIComponent(window.location.pathname)}`;
+        return true;
+    } else if (data.refresh === true) {
+        window.location.reload(true);
+        return true;
+    }
+    return false;
+};
+//usage: if (checkApiLogoutRefresh(data)) return;
+
+
+/**
+ * To display the markdown errors.
+ * NOTE: likely deprecate when creating default api response handlers
+ * @param {object} data
+ * @param {object} notify
+ * @returns
+ */
+const updateMarkdownNotification = (data, notify) => {
+    if (data.markdown === true) {
+        let msgHtml = convertMarkdown(data.message, true);
+        if (data.type === 'danger') {
+            msgHtml += `<div class="text-right">
+                <small>
+                    For support, visit <strong><a href="http://discord.gg/txAdmin" target="_blank" class="text-dark">discord.gg/txAdmin</a></strong>.
+                </small>
+            </div>`;
+        }
+
+        notify.update('progress', 0);
+        notify.update('type', data.type);
+        notify.update('message', msgHtml);
+
+        //since we can't change the duration with an update
+        setTimeout(() => {
+            notify.update('progress', 0);
+        }, 5000);
+    } else {
+        notify.update('progress', 0);
+        notify.update('type', data.type);
+        notify.update('message', data.message);
+    }
+    return false;
+};
+
+//Must be as close to a JQuery $.ajax() as possible
+//TODO: abstract a little bit more and use fetch
+//TODO: use the function above for all calls
+//NOTE: datatype is the expected return, we can probably remove it
+//NOTE: still one $.ajax at setup.html > setFavTemplatesCards
+//NOTE: to send json:
+//  data: JSON.stringify(data)
+//  contentType: 'application/json'
+const txAdminAPI = ({type, url, data, dataType, timeout, success, error}) => {
+    if (anyUndefined(type, url)) return false;
+
+    url = TX_BASE_PATH + url;
+    timeout = timeout || REQ_TIMEOUT_MEDIUM;
+    dataType = dataType || 'json';
+    success = success || (() => {});
+    error = error || (() => {});
+    const headers = {'X-TxAdmin-CsrfToken': (csrfToken) ? csrfToken : 'not_set'}
+    // console.log(`txAdminAPI Req to: ${url}`);
+    return $.ajax({type, url, timeout, data, dataType, success, error, headers});
+};
+
+const txAdminAlert = ({content, modalColor, title}) => {
+    $.confirm({
+        title,
+        content: content,
+        type: modalColor || 'green',
+        buttons: {
+            close: {
+                text: 'Close',
+                keys: ['enter'],
+            }
+        },
+    });
+};
+
+const txAdminConfirm = ({content, confirmBtnClass, modalColor, title}) => {
+    return new Promise((resolve, reject) => {
+        $.confirm({
+            title,
+            content: content,
+            type: modalColor || 'red',
+            buttons: {
+                cancel: () => {resolve(false);},
+                confirm:  {
+                    btnClass: confirmBtnClass || 'btn-red',
+                    keys: ['enter'],
+                    action: () => {resolve(true);},
+                },
+            },
+            onClose: () => {resolve(false);},
+        });
+    });
+};
+
+const txAdminPrompt = ({
+    confirmBtnClass = 'btn-blue',
+    modalColor = 'blue',
+    title = '',
+    description = '',
+    placeholder = '',
+    required = true,
+}) => {
+    return new Promise((resolve, reject) => {
+        $.confirm({
+            title,
+            type: modalColor,
+            content: `
+                <form action="">
+                    <div class="form-group">
+                        <label>${description}</label>
+                        <input type="text" placeholder="${placeholder}" class="inputField form-control" ${required && 'required'} />
+                    </div>
+                </form>`,
+            buttons: {
+                cancel: () => {resolve(false);},
+                formSubmit: {
+                    text: 'Submit',
+                    btnClass: confirmBtnClass,
+                    action: function () {
+                        resolve(this.$content.find('.inputField').val());
+                    },
+                },
+            },
+            onClose: () => {
+                resolve(false);
+            },
+            onContentReady: function () {
+                const jc = this;
+                this.$content.find('form').on('submit', function (e) {
+                    e.preventDefault();
+                    jc.$$formSubmit.trigger('click');
+                });
+                this.$content.find('input').focus();
+            },
+        });
+    });
+};
+
+
+//================================================================
+//================================================= Darkmode Theme
+//================================================================
+(function () {
+    if (!isWebInterface) return;
+    const darkModeCookie = document.cookie.match(/(^| )txAdmin-darkMode=([^;]+)/);
+
+    if (darkModeCookie === null) {
+        console.log('no theme cookie found');
+        //If the user has Dark Mode as their OS default
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            console.log('OS dark mode detected');
+            document.body.classList.toggle('theme--dark');
+            document.cookie = 'txAdmin-darkMode=true;path=/';
+
+        //If the user is on desktop
+        } else if (window.location.pathname == '/') {
+            const darkModeSuggestionCookie = document.cookie.match(/(^| )txAdmin-darkModeSuggestion=([^;]+)/);
+            const suggestionInterval = 24 * 60 * 60 * 1000; // every day
+            if (darkModeSuggestionCookie === null) {
+                const expDate = new Date();
+                expDate.setTime(expDate.getTime() + suggestionInterval);
+
+                const darkToggleArea = document.getElementById('darkToggleArea');
+                const tooltip = new coreui.Tooltip(darkToggleArea, {
+                    container: 'body',
+                    boundary: 'window',
+                    offset: function offset(_ref) {
+                        return [0, _ref.popper.height / 3];
+                    },
+                });
+                setTimeout(() => {
+                    tooltip.show();
+                    document.cookie = `txAdmin-darkModeSuggestion=true;expires=${expDate.toUTCString()};path=/`;
+                }, 2000);
+            }
+        }
+    }
+
+    const hiddenClass = 'd-none';
+    let isDarkMode = document.body.classList.contains('theme--dark');
+
+    const toggle1 = document.getElementById('darkToggleDark');
+    const toggle2 = document.getElementById('darkToggleLight');
+    toggle1.classList.toggle(hiddenClass, isDarkMode);
+    toggle2.classList.toggle(hiddenClass, !isDarkMode);
+
+    const handlerFn = function () {
+        document.body.classList.toggle('theme--dark');
+        toggle1.classList.toggle(hiddenClass);
+        toggle2.classList.toggle(hiddenClass);
+        isDarkMode = !isDarkMode;
+        document.cookie = `txAdmin-darkMode=${isDarkMode};path=/`;
+    };
+
+    toggle1.addEventListener('click', handlerFn);
+    toggle2.addEventListener('click', handlerFn);
+})();

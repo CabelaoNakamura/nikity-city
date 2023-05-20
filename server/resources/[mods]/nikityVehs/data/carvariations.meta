@@ -1833,6 +1833,7 @@
 			<lightSettings value="1200"/>
 			<sirenSettings value="0"/>
 		</Item>
+<<<<<<< Updated upstream
 	</variationData>
 </CVehicleModelInfoVariation>
 
@@ -1844,6 +1845,16 @@
             134 
             134 
             0 
+=======
+        <Item>
+      <modelName>xp210</modelName>
+      <colors>
+        <Item>
+          <indices content="char_array">
+            0
+            0
+            156
+>>>>>>> Stashed changes
             0
           </indices>
           <liveries>
@@ -1859,6 +1870,7 @@
         </Item>
         <Item>
           <indices content="char_array">
+<<<<<<< Updated upstream
             134 
             134 
             0 
@@ -1866,6 +1878,14 @@
           </indices>
           <liveries>
             <Item value="false" />
+=======
+            29
+            0
+            28
+            156
+          </indices>
+          <liveries>
+>>>>>>> Stashed changes
             <Item value="true" />
             <Item value="false" />
             <Item value="false" />
@@ -1873,10 +1893,15 @@
             <Item value="false" />
             <Item value="false" />
             <Item value="false" />
+<<<<<<< Updated upstream
+=======
+            <Item value="false" />
+>>>>>>> Stashed changes
           </liveries>
         </Item>
         <Item>
           <indices content="char_array">
+<<<<<<< Updated upstream
             134 
             134 
             0 
@@ -1885,16 +1910,30 @@
           <liveries>
             <Item value="false" />
             <Item value="false" />
+=======
+            64
+            0
+            68
+            156
+          </indices>
+          <liveries>
+>>>>>>> Stashed changes
             <Item value="true" />
             <Item value="false" />
             <Item value="false" />
             <Item value="false" />
             <Item value="false" />
             <Item value="false" />
+<<<<<<< Updated upstream
+=======
+            <Item value="false" />
+            <Item value="false" />
+>>>>>>> Stashed changes
           </liveries>
         </Item>
         <Item>
           <indices content="char_array">
+<<<<<<< Updated upstream
             134 
             134 
             0 
@@ -1904,11 +1943,20 @@
             <Item value="false" />
             <Item value="false" />
             <Item value="false" />
+=======
+            112
+            0
+            0
+            156
+          </indices>
+          <liveries>
+>>>>>>> Stashed changes
             <Item value="true" />
             <Item value="false" />
             <Item value="false" />
             <Item value="false" />
             <Item value="false" />
+<<<<<<< Updated upstream
           </liveries>
         </Item>
         <Item>
@@ -1980,10 +2028,16 @@
             <Item value="false" />
             <Item value="false" />
             <Item value="true" />
+=======
+            <Item value="false" />
+            <Item value="false" />
+            <Item value="false" />
+>>>>>>> Stashed changes
           </liveries>
         </Item>
       </colors>
       <kits>
+<<<<<<< Updated upstream
         <Item>0_default_modkit</Item>
       </kits>
       <windowsWithExposedEdges />
@@ -1996,3 +2050,33 @@
 
   </variationData>
   </CVehicleModelInfoVariation>
+=======
+        <Item>1278_xp210_modkit</Item>
+      </kits>
+      <windowsWithExposedEdges />
+      <plateProbabilities>
+        <Probabilities>
+          <Item>
+            <Name>Standard White</Name>
+            <Value value="25" />
+          </Item>
+          <Item>
+            <Name>White Plate 2</Name>
+            <Value value="50" />
+          </Item>
+          <Item>
+            <Name>Blue Plate</Name>
+            <Value value="10" />
+          </Item>
+          <Item>
+            <Name>Yellow Plate</Name>
+            <Value value="15" />
+          </Item>
+        </Probabilities>
+      </plateProbabilities>
+      <lightSettings value="0" />
+      <sirenSettings value="0" />
+    </Item>
+  </variationData>
+</CVehicleModelInfoVariation>
+>>>>>>> Stashed changes

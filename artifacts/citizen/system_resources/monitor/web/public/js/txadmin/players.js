@@ -1,1 +1,719 @@
-let cachedPlayers=[],biggestPlayerID=0;const playerlistElement=document.getElementById("playerlist"),plistMsgElement=document.getElementById("playerlist-message"),plistCountElement=document.getElementById("plist-count"),plistSearchElement=document.getElementById("plist-search");function applyPlayerlistFilter(){let e=plistSearchElement.value.toLowerCase();Array.from(playerlistElement.children).forEach((t=>{"playerlist-message"!=t.id&&(""==e||"string"==typeof t.dataset.pname&&t.dataset.pname.includes(e)?t.hidden=!1:t.hidden=!0)}))}function removePlayer(e){document.getElementById(`divPlayer${e.id}`).remove()}function addPlayer(e){e.id>biggestPlayerID&&(biggestPlayerID=e.id);let t=`<div class="list-group-item list-group-item-accent-secondary player text-truncate" \n                onclick="showPlayer('${e.license}')" id="divPlayer${e.id}">\n                    <span class="pping"> ---- </span>\n                    <span class="pname">${xss(e.name)}</span>\n            </div>`;$("#playerlist").append(t)}function updatePlayer(e){let t,a=document.getElementById(`divPlayer${e.id}`);e.ping=parseInt(e.ping),e.ping<0?(t="secondary",e.ping="??"):t=e.ping<60?"success":e.ping<100?"warning":"danger",a.classList.remove("list-group-item-accent-secondary","list-group-item-accent-success","list-group-item-accent-warning","list-group-item-accent-danger"),a.classList.add("list-group-item-accent-"+t),a.firstElementChild.classList.remove("text-secondary","text-success","text-warning","text-danger");const n=biggestPlayerID.toString().length+2;a.firstElementChild.innerHTML=`[${e.id}]`.padStart(n,"x").replace(/x/g,"&nbsp;"),a.lastElementChild.textContent=e.name,a.dataset.pname=e.name.toLowerCase()}function processPlayers(e){if(!Array.isArray(e))return Array.from(playerlistElement.children).forEach((e=>e.hidden=!0)),plistMsgElement.textContent="string"==typeof e?e:!1===e?"Playerlist not available.":"Invalid playerlist",void(plistMsgElement.hidden=!1);let t,a,n;plistMsgElement.hidden=!0,applyPlayerlistFilter();try{t=e.filter((e=>!cachedPlayers.filter((t=>t.id===e.id)).length)),a=cachedPlayers.filter((t=>!e.filter((e=>e.id===t.id)).length)),n=cachedPlayers.filter((t=>e.filter((e=>e.id===t.id)).length))}catch(e){console.log(`Failed to process the playerlist with message: ${e.message}`)}a.forEach(removePlayer),t.forEach(addPlayer),n.forEach(updatePlayer),e.length||(plistMsgElement.hidden=!1,plistMsgElement.innerHTML="No Players Online.<br>\n        <small>If you have players in your server, remove <code>sv_lan</code> from <code>server.cfg</code>.</small>"),cachedPlayers=e,plistCountElement.textContent=e.length}plistSearchElement&&plistSearchElement.addEventListener("input",(function(e){applyPlayerlistFilter()}));const modPlayer={curr:{id:!1,license:!1,identifiers:!1},Modal:new coreui.Modal(document.getElementById("modPlayer")),Title:document.getElementById("modPlayerTitle"),Message:document.getElementById("modPlayerMessage"),Content:document.getElementById("modPlayerContent"),Buttons:{search:document.getElementById("modPlayerButtons-search"),message:document.getElementById("modPlayerButtons-message"),kick:document.getElementById("modPlayerButtons-kick"),warn:document.getElementById("modPlayerButtons-warn")},Main:{body:document.getElementById("modPlayerMain"),tab:document.getElementById("modPlayerMain-tab"),joinDate:document.getElementById("modPlayerMain-joinDate"),playTime:document.getElementById("modPlayerMain-playTime"),sessionTime:document.getElementById("modPlayerMain-sessionTime"),notesLog:document.getElementById("modPlayerMain-notesLog"),notes:document.getElementById("modPlayerMain-notes")},IDs:{body:document.getElementById("modPlayerIDs"),tab:document.getElementById("modPlayerIDs-tab"),list:document.getElementById("modPlayerIDs-list")},History:{body:document.getElementById("modPlayerHistory"),tab:document.getElementById("modPlayerHistory-tab"),list:document.getElementById("modPlayerHistory-log")},Ban:{body:document.getElementById("modPlayerBan"),tab:document.getElementById("modPlayerBan-tab"),reason:document.getElementById("modPlayerBan-reason"),durationSelect:document.getElementById("modPlayerBan-durationSelect"),durationMultiplier:document.getElementById("modPlayerBan-durationMultiplier"),durationUnit:document.getElementById("modPlayerBan-durationUnit")}};function showPlayer(e,t="unknown",a=""){modPlayer.curr.id=!1,modPlayer.curr.license=!1,modPlayer.curr.identifiers=!1,modPlayer.Message.innerHTML=SPINNER_HTML,modPlayer.Message.classList.remove("d-none"),modPlayer.Content.classList.add("d-none"),modPlayer.Title.innerText="loading...",modPlayer.Main.tab.classList.add("active"),modPlayer.Main.body.classList.add("show","active"),modPlayer.Main.joinDate.innerText="--",modPlayer.Main.playTime.innerText="--",modPlayer.Main.sessionTime.innerText="--",modPlayer.Main.notesLog.innerText="--",modPlayer.Main.notes.value="",modPlayer.IDs.tab.classList.remove("active"),modPlayer.IDs.body.classList.remove("show","active"),modPlayer.IDs.list.innerText="loading...",modPlayer.History.tab.classList.remove("active"),modPlayer.History.body.classList.remove("show","active"),modPlayer.History.list.innerText="loading...",modPlayer.Ban.tab.classList.remove("nav-link-red","active"),modPlayer.Ban.body.classList.remove("show","active"),modPlayer.Ban.tab.classList.add("nav-link-disabled","disabled"),modPlayer.Ban.reason.value="",modPlayer.Ban.durationSelect.value="2 days",modPlayer.Ban.durationMultiplier.value="",modPlayer.Ban.durationUnit.value="days",modPlayer.Ban.durationMultiplier.disabled=!0,modPlayer.Ban.durationUnit.disabled=!0,modPlayer.Buttons.search.disabled=!0,modPlayer.Buttons.message.disabled=!0,modPlayer.Buttons.kick.disabled=!0,modPlayer.Buttons.warn.disabled=!0,modPlayer.Modal.show(),txAdminAPI({url:"/player/"+e,type:"GET",dataType:"json",success:function(e){if(e.logout)window.location="/auth?logout";else{if("danger"==e.type)return modPlayer.Title.innerText="Error",void(modPlayer.Message.innerHTML=`<h4 class=text-danger>${xss(e.message)}</h4>`);if("offline"==e.type){modPlayer.Title.innerText=t;const n=a.split(";"),r=n.join(";\n");let s=`<h4 class=text-danger>${xss(e.message)}</h4>\n`;return s+="Player Identifiers:<br>\n",s+=`<code>${xss(r)}</code>`,modPlayer.Message.innerHTML=s,modPlayer.curr.identifiers=n,void(modPlayer.Buttons.search.disabled=!1)}if(modPlayer.curr.id=e.id,modPlayer.curr.license=e.license,modPlayer.curr.identifiers=e.identifiers,modPlayer.Title.innerText=e.id?`[${e.id}] ${e.name}`:e.name,modPlayer.Main.joinDate.innerText=e.joinDate,modPlayer.Main.playTime.innerText=e.playTime,modPlayer.Main.sessionTime.innerText=e.sessionTime,modPlayer.Main.notesLog.innerText=e.notesLog,modPlayer.Main.notes.disabled=e.isTmp,modPlayer.Main.notes.value=e.notes,modPlayer.IDs.list.innerText=e.identifiers.join(",\n"),Array.isArray(e.actionHistory)&&e.actionHistory.length){e.actionHistory.reverse();let t=e.actionHistory.map((e=>`<div class="list-group-item list-group-item-accent-${xss(e.color)} player-history-entry">\n                                [${xss(e.date)}]<strong>[${xss(e.action)}]</strong>\n                                ${xss(e.reason)} (${xss(e.author)})\n                            </div>`));t.push('<div class="text-center text-info">\n                    For more events, click on the Search button below.\n                </div>'),modPlayer.History.list.innerHTML=t.join("\n")}else modPlayer.History.list.innerHTML='<h3 class="mx-auto pt-3 text-secondary">nothing here...</h3>';modPlayer.Buttons.search.disabled=!1,modPlayer.Buttons.message.disabled=e.funcDisabled.message,modPlayer.Buttons.kick.disabled=e.funcDisabled.kick,modPlayer.Buttons.warn.disabled=e.funcDisabled.warn,e.funcDisabled.ban||(modPlayer.Ban.tab.classList.add("nav-link-red"),modPlayer.Ban.tab.classList.remove("nav-link-disabled","disabled")),modPlayer.Content.classList.remove("d-none"),modPlayer.Message.classList.add("d-none")}},error:function(e,t,a){modPlayer.Title.innerText="error",modPlayer.Content.classList.add("d-none"),modPlayer.Message.classList.remove("d-none"),modPlayer.Message.innerText=`Error loading player info:\n${a}`}})}function setNoteMessage(e,t){"string"==typeof t?modPlayer.Main.notesLog.innerHTML=`<span class="text-${t}">${e}</span>`:modPlayer.Main.notesLog.innerText=e}function searchPlayer(){if(modPlayer.Modal.hide(),!modPlayer.curr.identifiers)return;const e=modPlayer.curr.identifiers.join(";");window.location.pathname==TX_BASE_PATH+"/player/list"?(searchInput.value=e,performSearch()):window.location=TX_BASE_PATH+"/player/list#"+encodeURI(e)}function messagePlayer(){if(!modPlayer.curr.id)return;let e=prompt("Type your message.");if(!e||0===e.length)return;const t=$.notify({message:'<p class="text-center">Executing Command...</p>'},{});let a={id:modPlayer.curr.id,message:e.trim()};txAdminAPI({type:"POST",url:"/player/message",timeout:REQ_TIMEOUT_LONG,data:a,dataType:"json",success:function(e){t.update("progress",0),t.update("type",e.type),t.update("message",e.message)},error:function(e,a,n){t.update("progress",0),t.update("type","danger"),t.update("message",n)}})}function kickPlayer(){if(0==modPlayer.curr.id)return;let e=prompt("Type the kick reason or leave it blank (press enter)");if(null==e)return;const t=$.notify({message:'<p class="text-center">Executing Command...</p>'},{});let a={id:modPlayer.curr.id,reason:e};txAdminAPI({type:"POST",url:"/player/kick",timeout:REQ_TIMEOUT_LONG,data:a,dataType:"json",success:function(e){t.update("progress",0),t.update("type",e.type),t.update("message",e.message),"danger"!==e.type&&modPlayer.Modal.hide()},error:function(e,a,n){t.update("progress",0),t.update("type","danger"),t.update("message",n)}})}function warnPlayer(){if(0==modPlayer.curr.id)return;let e=prompt("Type the warn reason.");if(null==e)return;if(e=e.trim(),!e.length)return $.notify({message:'<p class="text-center">The warn reason is required.</p>'},{type:"danger"});const t=$.notify({message:'<p class="text-center">Executing Command...</p>'},{});let a={id:modPlayer.curr.id,reason:e};txAdminAPI({type:"POST",url:"/player/warn",timeout:REQ_TIMEOUT_LONG,data:a,dataType:"json",success:function(e){t.update("progress",0),t.update("type",e.type),t.update("message",e.message),"danger"!==e.type&&modPlayer.Modal.hide()},error:function(e,a,n){t.update("progress",0),t.update("type","danger"),t.update("message",n)}})}function banPlayer(){const e=modPlayer.Ban.reason.value.trim();if(!e.length)return void $.notify({message:'<p class="text-center">The ban reason is required.</p>'},{type:"danger"});const t="custom"===modPlayer.Ban.durationSelect.value?`${modPlayer.Ban.durationMultiplier.value} ${modPlayer.Ban.durationUnit.value}`:modPlayer.Ban.durationSelect.value,a=$.notify({message:'<p class="text-center">Executing Command...</p>'},{}),n={reason:e,duration:t,reference:!1!==modPlayer.curr.id?modPlayer.curr.id:modPlayer.curr.identifiers};txAdminAPI({type:"POST",url:"/player/ban",timeout:REQ_TIMEOUT_LONG,data:n,dataType:"json",success:function(e){a.update("progress",0),a.update("type",e.type),a.update("message",e.message),"danger"!==e.type&&modPlayer.Modal.hide()},error:function(e,t,n){a.update("progress",0),a.update("type","danger"),a.update("message",n)}})}modPlayer.Main.notes.addEventListener("keydown",(e=>{if(setNoteMessage("Press enter to save."),13==e.keyCode&&!e.shiftKey){e.preventDefault(),setNoteMessage("Saving...","warning");const t={license:modPlayer.curr.license,note:modPlayer.Main.notes.value};txAdminAPI({type:"POST",url:"/player/save_note",timeout:REQ_TIMEOUT_LONG,data:t,dataType:"json",success:function(e){"string"==typeof e.message&&"string"==typeof e.type?setNoteMessage(e.message,e.type):setNoteMessage("Failed to save with error: wrong return format","danger")},error:function(e,t,a){setNoteMessage(`Failed to save with error: ${a}`,"danger")}})}})),modPlayer.Ban.durationSelect.onchange=()=>{const e="custom"!==modPlayer.Ban.durationSelect.value;modPlayer.Ban.durationMultiplier.disabled=e,modPlayer.Ban.durationUnit.disabled=e};
+//================================================================
+//============================================== Playerlist
+//================================================================
+//Vars and elements
+let currServerMutex = false;
+let cachedPlayers = [];
+let biggestPlayerID = 0;
+const playerlistElement = document.getElementById('playerlist');
+const plistMsgElement = document.getElementById('playerlist-message');
+const plistCountElement = document.getElementById('plist-count');
+const plistSearchElement = document.getElementById('plist-search');
+
+//Apply filter
+function applyPlayerlistFilter() {
+    let search = plistSearchElement.value.toLowerCase();
+    Array.from(playerlistElement.children).forEach((el) => {
+        if (el.id === 'playerlist-message') return;
+        if (
+            search == ''
+            || (typeof el.dataset['pname'] == 'string' && el.dataset['pname'].includes(search))
+        ) {
+            el.hidden = false;
+        } else {
+            el.hidden = true;
+        }
+    });
+}
+
+//Search function
+if (plistSearchElement) plistSearchElement.addEventListener('input', function (ev) {
+    applyPlayerlistFilter();
+});
+
+//TODO: try this again, currently doesn't feel a very polished experience
+// Clear search when the user clicks away
+// plistSearchElement.addEventListener('focusout', (event) => {
+//     setTimeout(() => {
+//         event.target.value = ''
+//         Array.from(playerlistElement.children).forEach(el => {
+//             if(el.id == 'playerlist-message') return;
+//             el.hidden = false;
+//         });
+//     }, 1000);
+// });
+
+//Handle Remove, Add and Update playerlist
+function removePlayer(player) {
+    document.getElementById(`divPlayer${player.netid}`).remove();
+}
+
+function addPlayer(player) {
+    if (player.netid > biggestPlayerID) biggestPlayerID = player.netid;
+    let div = `<div class="list-group-item list-group-item-accent-secondary player text-truncate" 
+                onclick="showPlayerByMutexNetid('${currServerMutex}_${player.netid}')" id="divPlayer${player.netid}">
+                    <span class="pping"> ---- </span>
+                    <span class="pname">${xss(player.displayName)}</span>
+            </div>`;
+    $('#playerlist').append(div);
+}
+
+function updatePlayer(player) {
+    let el = document.getElementById(`divPlayer${player.netid}`);
+    let pingClass = 'secondary'; //hardcoded, no more ping data
+
+    el.classList.remove('list-group-item-accent-secondary', 'list-group-item-accent-success', 'list-group-item-accent-warning', 'list-group-item-accent-danger');
+    el.classList.add('list-group-item-accent-' + pingClass);
+    el.firstElementChild.classList.remove('text-secondary', 'text-success', 'text-warning', 'text-danger');
+    const padSize = biggestPlayerID.toString().length + 2;
+    el.firstElementChild.innerHTML = `[${player.netid}]`.padStart(padSize, 'x').replace(/x/g, '&nbsp;');
+    el.lastElementChild.textContent = player.displayName;
+    el.dataset['pname'] = player.pureName;
+}
+
+
+function processPlayers(players, mutex) {
+    //If invalid playerlist or error message
+    if (!Array.isArray(players)) {
+        Array.from(playerlistElement.children).forEach((el) => el.hidden = true);
+        if (typeof players == 'string') {
+            plistMsgElement.textContent = players;
+        } else if (players === false) {
+            plistMsgElement.textContent = 'Playerlist not available.';
+        } else {
+            plistMsgElement.textContent = 'Invalid playerlist';
+        }
+        plistMsgElement.hidden = false;
+        return;
+    }
+    plistMsgElement.hidden = true;
+    applyPlayerlistFilter();
+    currServerMutex = mutex;
+
+    let newPlayers, removedPlayers, updatedPlayers;
+    try {
+        newPlayers = players.filter((p) => {
+            return !cachedPlayers.filter((x) => x.netid === p.netid).length;
+        });
+
+        removedPlayers = cachedPlayers.filter((p) => {
+            return !players.filter((x) => x.netid === p.netid).length;
+        });
+
+        updatedPlayers = cachedPlayers.filter((p) => {
+            return players.filter((x) => x.netid === p.netid).length;
+        });
+    } catch (error) {
+        console.log(`Failed to process the playerlist with message: ${error.message}`);
+    }
+
+    removedPlayers.forEach(removePlayer);
+    newPlayers.forEach(addPlayer);
+    updatedPlayers.forEach(updatePlayer);
+
+    if (!players.length) {
+        plistMsgElement.hidden = false;
+        plistMsgElement.innerText = `No Players Online.`;
+    }
+    cachedPlayers = players;
+    plistCountElement.textContent = players.length;
+}
+
+
+
+//================================================================
+//============================================ Player Actions HTML
+//================================================================
+function dbActionToHtml(action, permsDisableWarn, permsDisableBan, serverTime) {
+    let revokeButton = '';
+    if (!permsDisableBan) {
+        if (
+            action.revokedBy ||
+            (action.type == 'warn' && permsDisableWarn) ||
+            (action.type == 'ban' && permsDisableBan)
+        ) {
+            revokeButton = `&nbsp;<span class="badge badge-outline-light btn-inline-sm txActionsBtn">REVOKE</span>`;
+        } else {
+            revokeButton = `&nbsp;<button onclick="revokeAction('${xss(action.id)}', true)" 
+                    class="btn btn-secondary btn-inline-sm txActionsBtn">REVOKE</button>`;
+        }
+    }
+    const reason = (action.reason) ? xss(action.reason) : '';
+    const actionDate = (new Date(action.ts * 1000)).toLocaleString();
+
+    let footerNote, actionColor, actionMessage;
+    if (action.type == 'ban') {
+        actionColor = 'danger';
+        actionMessage = `BANNED by ${xss(action.author)}`;
+    } else if (action.type == 'warn') {
+        actionColor = 'warning';
+        actionMessage = `WARNED by ${xss(action.author)}`;
+    }
+    if (action.revokedBy) {
+        actionColor = 'dark';
+        footerNote = `Revoked by ${action.revokedBy}.`;
+    }
+    if (typeof action.exp == 'number') {
+        const expirationDate = (new Date(action.exp * 1000)).toLocaleString();
+        footerNote = (action.exp < serverTime) ? `Expired at ${expirationDate}.` : `Expires at ${expirationDate}.`;
+    }
+    const footerNoteHtml = (footerNote) ? `<small class="d-block">${footerNote}</small>` : '';
+
+    return `<div class="list-group-item list-group-item-accent-${xss(actionColor)} logEntry">
+        <div class="d-flex w-100 justify-content-between">
+            <strong>${actionMessage}</strong>
+            <small class="text-right">
+                <span class="text-monospace font-weight-bold">(${xss(action.id)})</span>
+                ${xss(actionDate)}
+                ${revokeButton}
+            </small>
+        </div>
+        <span>${reason}</span>
+        ${footerNoteHtml}
+    </div>`;
+}
+
+//================================================================
+//============================================== Player Info Modal
+//================================================================
+//Preparing variables
+const modPlayer = {
+    currPlayerRef: false,
+    currPlayerRefString: false,
+    Modal: new coreui.Modal(document.getElementById('modPlayer')),
+    Title: document.getElementById('modPlayerTitle'),
+    Message: document.getElementById('modPlayerMessage'),
+    Content: document.getElementById('modPlayerContent'),
+    Buttons: {
+        message: document.getElementById('modPlayerButtons-message'),
+        kick: document.getElementById('modPlayerButtons-kick'),
+        warn: document.getElementById('modPlayerButtons-warn'),
+    },
+    Main: {
+        body: document.getElementById('modPlayerMain'),
+        tab: document.getElementById('modPlayerMain-tab'),
+        joinDate: document.getElementById('modPlayerMain-joinDate'),
+        playTime: document.getElementById('modPlayerMain-playTime'),
+        sessionTimeDiv: document.getElementById('modPlayerMain-sessionTimeDiv'),
+        sessionTimeText: document.getElementById('modPlayerMain-sessionTimeText'),
+        lastConnectionDiv: document.getElementById('modPlayerMain-lastConnectionDiv'),
+        lastConnectionText: document.getElementById('modPlayerMain-lastConnectionText'),
+        whitelisted: document.getElementById('modPlayerMain-whitelisted'),
+        whitelistAddBtn: document.getElementById('modPlayerMain-whitelistAddBtn'),
+        whitelistRemoveBtn: document.getElementById('modPlayerMain-whitelistRemoveBtn'),
+        logCountBans: document.getElementById('modPlayerMain-logCountBans'),
+        logCountWarns: document.getElementById('modPlayerMain-logCountWarns'),
+        logDetailsBtn: document.getElementById('modPlayerMain-logDetailsBtn'),
+        notesLog: document.getElementById('modPlayerMain-notesLog'),
+        notes: document.getElementById('modPlayerMain-notes'),
+    },
+    IDs: {
+        body: document.getElementById('modPlayerIDs'),
+        tab: document.getElementById('modPlayerIDs-tab'),
+        currList: document.getElementById('modPlayerIDs-currList'),
+        oldList: document.getElementById('modPlayerIDs-oldList'),
+    },
+    History: {
+        body: document.getElementById('modPlayerHistory'),
+        tab: document.getElementById('modPlayerHistory-tab'),
+        list: document.getElementById('modPlayerHistory-log'),
+    },
+    Ban: {
+        body: document.getElementById('modPlayerBan'),
+        tab: document.getElementById('modPlayerBan-tab'),
+        reason: document.getElementById('modPlayerBan-reason'),
+        durationSelect: document.getElementById('modPlayerBan-durationSelect'),
+        durationMultiplier: document.getElementById('modPlayerBan-durationMultiplier'),
+        durationUnit: document.getElementById('modPlayerBan-durationUnit'),
+    },
+};
+
+function tsToLocaleDate(ts) {
+    return new Date(ts * 1000)
+        .toLocaleDateString(
+            navigator.language,
+            { dateStyle: 'long' }
+        );
+}
+
+// Open Modal
+function showPlayerByMutexNetid(mutexNetid) {
+    const [mutex, netid] = mutexNetid.split(/[_#]/, 2);
+    return showPlayer({ mutex, netid });
+}
+function showPlayerByLicense(license) {
+    return showPlayer({ license });
+}
+function showPlayer(playerRef, keepTabSelection = false) {
+    //Reset active player
+    modPlayer.currPlayerRef = playerRef;
+    modPlayer.currPlayerRefString = new URLSearchParams(modPlayer.currPlayerRef).toString();
+
+    //Reset modal
+    modPlayer.Message.innerHTML = SPINNER_HTML;
+    modPlayer.Message.classList.remove('d-none');
+    modPlayer.Content.classList.add('d-none');
+    modPlayer.Title.innerText = 'loading...';
+
+    //Reset tab selection
+    if (!keepTabSelection) {
+        modPlayer.Main.tab.classList.add('active');
+        modPlayer.Main.body.classList.add('show', 'active');
+        modPlayer.IDs.tab.classList.remove('active');
+        modPlayer.IDs.body.classList.remove('show', 'active');
+        modPlayer.History.tab.classList.remove('active');
+        modPlayer.History.body.classList.remove('show', 'active');
+        modPlayer.Ban.tab.classList.remove('nav-link-red', 'active');
+        modPlayer.Ban.body.classList.remove('show', 'active');
+    }
+    modPlayer.Main.joinDate.innerText = '--';
+    modPlayer.Main.playTime.innerText = '--';
+    modPlayer.Main.sessionTimeText.innerText = '--';
+    modPlayer.Main.sessionTimeDiv.classList.add('d-none');
+    modPlayer.Main.lastConnectionText.innerText = '--';
+    modPlayer.Main.lastConnectionDiv.classList.add('d-none');
+    modPlayer.Main.whitelisted.innerText = '--';
+    modPlayer.Main.whitelistAddBtn.classList.add('d-none');
+    modPlayer.Main.whitelistRemoveBtn.classList.add('d-none');
+    modPlayer.Main.logCountBans.innerText = '--';
+    modPlayer.Main.logCountBans.classList.remove('text-danger');
+    modPlayer.Main.logCountWarns.innerText = '--';
+    modPlayer.Main.logCountWarns.classList.remove('text-warning');
+
+    modPlayer.Main.notesLog.innerText = '--';
+    modPlayer.Main.notes.value = 'cannot set notes for players that are not registered';
+    modPlayer.Main.notes.disabled = true;
+
+    modPlayer.IDs.currList.innerText = 'loading...';
+    modPlayer.IDs.oldList.innerText = 'loading...';
+    modPlayer.History.list.innerText = 'loading...';
+
+    modPlayer.Ban.tab.classList.add('nav-link-disabled', 'disabled');
+    modPlayer.Ban.reason.value = '';
+    modPlayer.Ban.durationSelect.value = '2 days';
+    modPlayer.Ban.durationMultiplier.value = '';
+    modPlayer.Ban.durationUnit.value = 'days';
+    modPlayer.Ban.durationMultiplier.disabled = true;
+    modPlayer.Ban.durationUnit.disabled = true;
+    modPlayer.Buttons.message.disabled = true;
+    modPlayer.Buttons.kick.disabled = true;
+    modPlayer.Buttons.warn.disabled = true;
+    modPlayer.Modal.show();
+
+    //Perform request
+    txAdminAPI({
+        type: 'GET',
+        url: `/player?${modPlayer.currPlayerRefString}`,
+        success: function (data) {
+            if (checkApiLogoutRefresh(data)) return;
+            const { meta, player, error } = data;
+            if (error) {
+                modPlayer.Title.innerText = 'Error';
+                modPlayer.Message.innerHTML = `<h4 class=text-danger>${xss(error)}</h4>`;
+                return;
+            }
+
+            //Setting modal fields
+            modPlayer.Title.innerText = `[${player.netid || 'OFFLINE'}] ${player.displayName}`;
+            if (player.isConnected) {
+                if (Array.isArray(player.ids) && player.ids.length) {
+                    modPlayer.IDs.currList.innerHTML = player.ids
+                        .map(id => `<div class="idsText border-dark">${xss(id)}</div>`)
+                        .join('\n');
+                } else {
+                    modPlayer.IDs.currList.innerHTML = '<em class="text-secondary">This player has no identifiers.</em>';
+                }
+
+                modPlayer.Main.sessionTimeText.innerText = msToDuration(
+                    player.sessionTime * 60_000,
+                    { units: ['h', 'm'] }
+                );
+                modPlayer.Main.sessionTimeDiv.classList.remove('d-none');
+            }else{
+                modPlayer.IDs.currList.innerHTML = '<em class="text-secondary">Player offline.</em>';
+            }
+            if (player.isRegistered) {
+                modPlayer.Main.joinDate.innerText = tsToLocaleDate(player.tsJoined);
+                modPlayer.Main.playTime.innerText = msToDuration(
+                    player.playTime * 60_000,
+                    { units: ['d', 'h', 'm'] }
+                );
+                if (!player.isConnected) {
+                    modPlayer.Main.lastConnectionText.innerText = tsToLocaleDate(player.tsLastConnection);;
+                    modPlayer.Main.lastConnectionDiv.classList.remove('d-none');
+                }
+
+                //Old identifiers
+                if (Array.isArray(player.oldIds)) {
+                    const filteredIds = player.oldIds
+                        .filter(id => !player.isConnected || !player.ids.includes(id)) //don't filter when offline
+                        .map(id => `<div class="idsText border-dark text-muted">${xss(id)}</div>`)
+                        .join('\n');
+                    modPlayer.IDs.oldList.innerHTML = (filteredIds.length)
+                        ? filteredIds
+                        : '<em class="text-secondary">No previous ID to show.</em>';
+                } else {
+                    modPlayer.IDs.oldList.innerHTML = '<em class="text-secondary">No previous ID to show.</em>';
+                }
+
+                //Whitelist
+                if (player.tsWhitelisted) {
+                    modPlayer.Main.whitelisted.innerText = tsToLocaleDate(player.tsWhitelisted);
+                    if (meta.tmpPerms.whitelist) {
+                        modPlayer.Main.whitelistRemoveBtn.classList.remove('d-none');
+                    }
+                } else {
+                    modPlayer.Main.whitelisted.innerText = 'not yet';
+                    if (meta.tmpPerms.whitelist) {
+                        modPlayer.Main.whitelistAddBtn.classList.remove('d-none');
+                    }
+                }
+
+                //Notes
+                modPlayer.Main.notes.disabled = false;
+                if (player.notes && player.notesLog) {
+                    modPlayer.Main.notesLog.innerText = player.notesLog;
+                    modPlayer.Main.notes.value = player.notes;
+                } else {
+                    modPlayer.Main.notes.value = '';
+                }
+            }
+
+            //Enabling/disabling features
+            modPlayer.Buttons.message.disabled = !(meta.tmpPerms.message && player.isConnected);
+            modPlayer.Buttons.kick.disabled = !(meta.tmpPerms.kick && player.isConnected);
+            modPlayer.Buttons.warn.disabled = !(meta.tmpPerms.warn && player.isConnected && player.isRegistered);
+            if (meta.tmpPerms.ban && player.isRegistered) {
+                modPlayer.Ban.tab.classList.add('nav-link-red');
+                modPlayer.Ban.tab.classList.remove('nav-link-disabled', 'disabled');
+            }
+
+            if (!Array.isArray(player.actionHistory) || !player.actionHistory.length) {
+                modPlayer.History.list.innerHTML = '<h4 class="pt-3 text-secondary">No bans/warns found.</h4>';
+            } else {
+                player.actionHistory.reverse();
+                const counts = { ban: 0, warn: 0 };
+                let logElements = [];
+                for (const action of player.actionHistory) {
+                    counts[action.type]++;
+                    logElements.push(dbActionToHtml(action, !meta.tmpPerms.warn, !meta.tmpPerms.ban, meta.serverTime));
+                }
+                modPlayer.History.list.innerHTML = [
+                    `<div class="list-group list-group-accent thin-scroll scrollBox">`,
+                    ...logElements,
+                    `</div>`
+                ].join('\n');
+
+                modPlayer.Main.logCountBans.innerText = (counts.ban === 1) ? '1 ban' : `${counts.ban} bans`;
+                if (counts.ban) modPlayer.Main.logCountBans.classList.add('text-danger');
+                modPlayer.Main.logCountWarns.innerText = (counts.warn === 1) ? '1 warn' : `${counts.warn} warns`;
+                if (counts.warn) modPlayer.Main.logCountWarns.classList.add('text-warning');
+            }
+
+            //Show modal body
+            modPlayer.Content.classList.remove('d-none');
+            modPlayer.Message.classList.add('d-none');
+        },
+        error: function (xmlhttprequest, textstatus, message) {
+            modPlayer.Title.innerText = 'error';
+            modPlayer.Content.classList.add('d-none');
+            modPlayer.Message.classList.remove('d-none');
+            modPlayer.Message.innerText = `Error loading player info:\n${message}`;
+        },
+    });
+}
+
+
+/**
+ * Player note functions
+ */
+function setNoteMessage(msg, type) {
+    if (typeof type == 'string') {
+        modPlayer.Main.notesLog.innerHTML = `<span class="text-${type}">${msg}</span>`;
+    } else {
+        modPlayer.Main.notesLog.innerText = msg;
+    }
+}
+modPlayer.Main.notes.addEventListener('keydown', (event) => {
+    setNoteMessage('Press enter to save.');
+    if (event.keyCode == 13 && !event.shiftKey) {
+        event.preventDefault();
+        setNoteMessage('Saving...', 'warning');
+        txAdminAPI({
+            type: 'POST',
+            url: `/player/save_note?${modPlayer.currPlayerRefString}`,
+            timeout: REQ_TIMEOUT_LONG,
+            data: { note: modPlayer.Main.notes.value },
+            success: function (data) {
+                if (data.success === true) {
+                    setNoteMessage('Note saved.', 'success');
+                } else {
+                    setNoteMessage(data.error || 'unknown error', 'danger');
+                }
+            },
+            error: function (xmlhttprequest, textstatus, message) {
+                setNoteMessage(`Failed to save: ${message}`, 'danger');
+            },
+        });
+    }
+});
+
+
+/**
+ * Player whitelist function
+ */
+function setPlayerWhitelistStatus(status) {
+    const notify = $.notify({ message: '<p class="text-center">Saving...</p>' }, {});
+    txAdminAPI({
+        type: "POST",
+        url: `/player/whitelist?${modPlayer.currPlayerRefString}`,
+        timeout: REQ_TIMEOUT_LONG,
+        data: { status },
+        success: function (data) {
+            notify.update('progress', 0);
+            if (data.success === true) {
+                notify.update('type', 'success');
+                notify.update('message', 'Whitelist status changed.');
+                showPlayer(modPlayer.currPlayerRef);
+            } else {
+                notify.update('type', 'danger');
+                notify.update('message', data.error || 'unknown error');
+            }
+        },
+        error: function (xmlhttprequest, textstatus, message) {
+            notify.update('progress', 0);
+            notify.update('type', 'danger');
+            notify.update('message', message);
+        }
+    });
+}
+modPlayer.Main.whitelistAddBtn.addEventListener('click', (event) => {
+    setPlayerWhitelistStatus(true);
+});
+modPlayer.Main.whitelistRemoveBtn.addEventListener('click', (event) => {
+    setPlayerWhitelistStatus(false);
+});
+
+
+/**
+ * Warn Player
+ */
+async function warnPlayer() {
+    if (!modPlayer.currPlayerRefString) return;
+    modPlayer.Modal.hide(); //otherwise we cannot type
+    const reason = await txAdminPrompt({
+        modalColor: 'orange',
+        confirmBtnClass: 'btn-orange',
+        title: 'Warn Player',
+        description: 'Type the warn reason.',
+    });
+    if (reason === false) return;
+    if (!reason.length) {
+        return $.notify({ message: '<p class="text-center">The warn reason is required.</p>' }, { type: 'danger' });
+    }
+    const notify = $.notify({ message: '<p class="text-center">Executing Command...</p>' }, {});
+
+    txAdminAPI({
+        type: 'POST',
+        url: `/player/warn?${modPlayer.currPlayerRefString}`,
+        timeout: REQ_TIMEOUT_LONG,
+        data: { reason: reason },
+        success: function (data) {
+            notify.update('progress', 0);
+            if (data.success === true) {
+                notify.update('type', 'success');
+                notify.update('message', 'Player warned.');
+                modPlayer.Modal.hide();
+            } else {
+                notify.update('type', 'danger');
+                notify.update('message', data.error || 'unknown error');
+            }
+        },
+        error: function (xmlhttprequest, textstatus, message) {
+            notify.update('progress', 0);
+            notify.update('type', 'danger');
+            notify.update('message', message);
+        },
+    });
+}
+
+
+/**
+ * Ban Player functions
+ */
+modPlayer.Ban.durationSelect.onchange = () => {
+    const isDefault = (modPlayer.Ban.durationSelect.value !== 'custom');
+    modPlayer.Ban.durationMultiplier.disabled = isDefault;
+    modPlayer.Ban.durationUnit.disabled = isDefault;
+};
+
+function banPlayer() {
+    if (!modPlayer.currPlayerRefString) return;
+    const reason = modPlayer.Ban.reason.value.trim();
+    if (!reason.length) {
+        $.notify({ message: '<p class="text-center">The ban reason is required.</p>' }, { type: 'danger' });
+        return;
+    }
+    const duration = modPlayer.Ban.durationSelect.value === 'custom'
+        ? `${modPlayer.Ban.durationMultiplier.value} ${modPlayer.Ban.durationUnit.value}`
+        : modPlayer.Ban.durationSelect.value;
+
+    const notify = $.notify({ message: '<p class="text-center">Executing Command...</p>' }, {});
+    const data = {
+        reason,
+        duration,
+    };
+    txAdminAPI({
+        type: 'POST',
+        url: `/player/ban?${modPlayer.currPlayerRefString}`,
+        timeout: REQ_TIMEOUT_LONG,
+        data: data,
+        success: function (data) {
+            notify.update('progress', 0);
+            if (data.success === true) {
+                notify.update('type', 'success');
+                notify.update('message', 'Player banned.');
+                modPlayer.Modal.hide();
+            } else {
+                notify.update('type', 'danger');
+                notify.update('message', data.error || 'unknown error');
+            }
+        },
+        error: function (xmlhttprequest, textstatus, message) {
+            notify.update('progress', 0);
+            notify.update('type', 'danger');
+            notify.update('message', message);
+        },
+    });
+}
+
+
+
+/**
+ * Revoke action
+ * NOTE: also used in the players page
+ */
+function revokeAction(action_id, isModal = false) {
+    if (!action_id) {
+        return $.notify({ message: 'Invalid actionID' }, { type: 'danger' });
+    }
+
+    const notify = $.notify({ message: '<p class="text-center">Revoking...</p>' }, {});
+    txAdminAPI({
+        type: "POST",
+        url: '/database/revoke_action',
+        timeout: REQ_TIMEOUT_LONG,
+        data: { action_id },
+        success: function (data) {
+            notify.update('progress', 0);
+            if (data.success === true) {
+                notify.update('type', 'success');
+                notify.update('message', 'Action revoked.');
+                if (isModal) {
+                    showPlayer(modPlayer.currPlayerRef, true);
+                } else {
+                    window.location.reload(true);
+                }
+            } else {
+                notify.update('type', 'danger');
+                notify.update('message', data.error || 'unknown error');
+            }
+        },
+        error: function (xmlhttprequest, textstatus, message) {
+            notify.update('progress', 0);
+            notify.update('type', 'danger');
+            notify.update('message', message);
+        }
+    });
+}
+
+
+
+/**
+ * Message/DM Player
+ */
+async function messagePlayer() {
+    if (!modPlayer.currPlayerRefString) return;
+    modPlayer.Modal.hide();
+    const message = await txAdminPrompt({
+        title: 'Direct Message',
+        description: 'Type direct message below:',
+    });
+    if (message === false) return;
+    if (!message.length) {
+        return $.notify({ message: '<p class="text-center">The DM message is required.</p>' }, { type: 'danger' });
+    }
+
+    const notify = $.notify({ message: '<p class="text-center">Executing Command...</p>' }, {});
+
+    txAdminAPI({
+        type: 'POST',
+        url: `/player/message?${modPlayer.currPlayerRefString}`,
+        timeout: REQ_TIMEOUT_LONG,
+        data: { message: message.trim() },
+        success: function (data) {
+            if (data.success === true) {
+                notify.update('type', 'success');
+                notify.update('message', 'Direct message sent.');
+            } else {
+                notify.update('type', 'danger');
+                notify.update('message', data.error || 'unknown error');
+            }
+            notify.update('progress', 0);
+        },
+        error: function (xmlhttprequest, textstatus, message) {
+            notify.update('progress', 0);
+            notify.update('type', 'danger');
+            notify.update('message', message);
+        },
+    });
+}
+
+
+/**
+ * Kick player
+ */
+async function kickPlayer() {
+    if (!modPlayer.currPlayerRefString) return;
+    modPlayer.Modal.hide();
+    const reason = await txAdminPrompt({
+        modalColor: 'red',
+        confirmBtnClass: 'btn-red',
+        title: 'Kick Player',
+        description: 'Type the kick reason or leave it blank (press enter)',
+        required: false,
+    });
+    if (reason === false) return;
+
+    const notify = $.notify({ message: '<p class="text-center">Executing Command...</p>' }, {});
+
+    txAdminAPI({
+        type: 'POST',
+        url: `/player/kick?${modPlayer.currPlayerRefString}`,
+        timeout: REQ_TIMEOUT_LONG,
+        data: { reason: reason.trim() },
+        success: function (data) {
+            if (data.success === true) {
+                notify.update('type', 'success');
+                notify.update('message', 'Player kicked.');
+            } else {
+                notify.update('type', 'danger');
+                notify.update('message', data.error || 'unknown error');
+            }
+            notify.update('progress', 0);
+        },
+        error: function (xmlhttprequest, textstatus, message) {
+            notify.update('progress', 0);
+            notify.update('type', 'danger');
+            notify.update('message', message);
+        },
+    });
+}
+
+
+/**
+ * Other stuff
+ */
+modPlayer.Main.logDetailsBtn.addEventListener('click', (event) => {
+    modPlayer.History.tab.click();
+});

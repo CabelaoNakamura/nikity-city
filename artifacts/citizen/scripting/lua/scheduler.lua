@@ -68,14 +68,6 @@ local function FormatStackTrace()
 	return _in(`FORMAT_STACK_TRACE` & 0xFFFFFFFF, nil, 0, Citizen.ResultAsString())
 end
 
-local newThreads = {}
-local threads = setmetatable({}, {
-	-- This circumvents undefined behaviour in "next" (and therefore "pairs")
-	__newindex = newThreads,
-	-- This is needed for CreateThreadNow to work correctly
-	__index = newThreads
-})
-
 local boundaryIdx = 1
 
 local function dummyUseBoundary(idx)
@@ -124,7 +116,7 @@ function Citizen.Await(promise)
 	end
 
 	if promise.state == 2 then
-		error(promise.value, 0)
+		error(promise.value, 2)
 	end
 
 	return promise.value
@@ -200,11 +192,13 @@ Citizen.SetEventRoutine(function(eventName, eventPayload, eventSource)
 					handlerFn = handlerMT.__call
 				end
 
-				local di = debug_getinfo(handlerFn)
-			
-				Citizen.CreateThreadNow(function()
-					handler(table_unpack(data))
-				end, ('event %s [%s[%d..%d]]'):format(eventName, di.short_src, di.linedefined, di.lastlinedefined))
+				if type(handlerFn) == 'function' then
+					local di = debug_getinfo(handlerFn)
+				
+					Citizen.CreateThreadNow(function()
+						handler(table_unpack(data))
+					end, ('event %s [%s[%d..%d]]'):format(eventName, di.short_src, di.linedefined, di.lastlinedefined))
+				end
 			end
 		end
 	end
@@ -311,7 +305,7 @@ end
 
 function RemoveEventHandler(eventData)
 	if not eventData.key and not eventData.name then
-		error('Invalid event data passed to RemoveEventHandler()')
+		error('Invalid event data passed to RemoveEventHandler()', 2)
 	end
 
 	-- remove the entry
@@ -319,7 +313,7 @@ function RemoveEventHandler(eventData)
 end
 
 local ignoreNetEvent = {
-	'__cfx_internal:commandFallback'
+	['__cfx_internal:commandFallback'] = true,
 }
 
 function RegisterNetEvent(eventName, cb)
@@ -497,7 +491,7 @@ Citizen.SetCallRefRoutine(function(refId, argsSerialized)
 	local ref = refPtr.func
 
 	local err
-	local retvals
+	local retvals = false
 	local cb = {}
 	
 	local di = debug_getinfo(ref)
@@ -512,16 +506,14 @@ Citizen.SetCallRefRoutine(function(refId, argsSerialized)
 		end
 
 		if cb.cb then
-			cb.cb(retvals or false, err)
+			cb.cb(retvals, err)
+		elseif err then
+			Citizen.Trace(err)
 		end
 	end, ('ref call [%s[%d..%d]]'):format(di.short_src, di.linedefined, di.lastlinedefined))
 
 	if not waited then
 		if err then
-			if err ~= '' then
-				Citizen.Trace(err)
-			end
-			
 			return msgpack_pack(nil)
 		end
 
@@ -670,7 +662,7 @@ msgpack.extend_clear(EXT_FUNCREF, EXT_LOCALFUNCREF)
 -- RPC INVOCATION
 InvokeRpcEvent = function(source, ref, args)
 	if not coroutine_running() then
-		error('RPC delegates can only be invoked from a thread.')
+		error('RPC delegates can only be invoked from a thread.', 2)
 	end
 
 	local src = source
@@ -712,11 +704,11 @@ funcref_mt = msgpack.extend({
 	end,
 
 	__index = function(t, k)
-		error('Cannot index a funcref')
+		error('Cannot index a funcref', 2)
 	end,
 
 	__newindex = function(t, k, v)
-		error('Cannot set indexes on a funcref')
+		error('Cannot set indexes on a funcref', 2)
 	end,
 
 	__call = function(t, ...)
@@ -764,7 +756,7 @@ funcref_mt = msgpack.extend({
 		if refstr then
 			return refstr
 		else
-			error(("Unknown funcref type: %d %s"):format(tag, type(self)))
+			error(("Unknown funcref type: %d %s"):format(tag, type(self)), 2)
 		end
 	end,
 
@@ -834,11 +826,28 @@ local function lazyEventHandler() -- lazy initializer so we don't add an event w
 	lazyEventHandler = function() end
 end
 
+-- Helper for newlines in nested error message
+local function prefixNewlines(str, prefix)
+	str = tostring(str)
+
+	local out = ''
+
+	for bit in str:gmatch('[^\r\n]*\r?\n') do
+		out = out .. prefix .. bit
+	end
+
+	if #out == 0 or out:sub(#out) ~= '\n' then
+		out = out .. '\n'
+	end
+
+	return out
+end
+
 -- Handle an export with multiple return values.
 local function exportProcessResult(resource, exportName, status, ...)
 	if not status then
 		local result = tostring(select(1, ...))
-		error(('An error occurred while calling export %s of resource %s\n%s'):format(exportName, resource, result))
+		error(('\n^5 An error occurred while calling export `%s` in resource `%s`:\n%s^5 ---'):format(exportName, resource, prefixNewlines(result, '  ')), 2)
 	end
 	return ...
 end
@@ -864,7 +873,7 @@ setmetatable(exports, {
 					end)
 
 					if not exportsCallbackCache[resource][k] then
-						error('No such export ' .. k .. ' in resource ' .. resource)
+						error('No such export ' .. k .. ' in resource ' .. resource, 2)
 					end
 				end
 
@@ -874,13 +883,13 @@ setmetatable(exports, {
 			end,
 
 			__newindex = function(t, k, v)
-				error('cannot set values on an export resource')
+				error('cannot set values on an export resource', 2)
 			end
 		})
 	end,
 
 	__newindex = function(t, k, v)
-		error('cannot set values on exports')
+		error('cannot set values on exports', 2)
 	end,
 
 	__call = function(t, exportName, func)
@@ -892,31 +901,63 @@ setmetatable(exports, {
 
 -- NUI callbacks
 if not isDuplicityVersion then
+	local origRegisterNuiCallback = RegisterNuiCallback
+
+	local cbHandler
+
+--[==[
+	local cbHandler = load([[
+		-- Lua 5.4: Create a to-be-closed variable to monitor the NUI callback handle.
+		local callback, body, resultCallback = ...
+
+		local hasCallback = false
+		local _ <close> = defer(function()
+			if not hasCallback then
+				local di = debug.getinfo(callback, 'S')
+				local name = ('function %s[%d..%d]'):format(di.short_src, di.linedefined, di.lastlinedefined)
+				warn(("No NUI callback captured: %s"):format(name))
+			end
+		end)
+
+		local status, err = pcall(function()
+			callback(body, function(...)
+				hasCallback = true
+				resultCallback(...)
+			end)
+		end)
+
+		return status, err
+	]], '@citizen:/scripting/lua/scheduler.lua#nui')]==]
+
+	if not cbHandler then
+		cbHandler = load([[
+			local callback, body, resultCallback = ...
+
+			local status, err = pcall(function()
+				callback(body, resultCallback)
+			end)
+
+			return status, err
+		]], '@citizen:/scripting/lua/scheduler.lua#nui')
+	end
+
+	-- wrap RegisterNuiCallback to handle errors (and 'missed' callbacks)
+	function RegisterNuiCallback(type, callback)
+		origRegisterNuiCallback(type, function(body, resultCallback)
+			local status, err = cbHandler(callback, body, resultCallback)
+
+			if err then
+				Citizen.Trace("error during NUI callback " .. type .. ": " .. tostring(err) .. "\n")
+			end
+		end)
+	end
+
+	-- 'old' function (uses events for compatibility, as people may have relied on this implementation detail)
 	function RegisterNUICallback(type, callback)
 		RegisterNuiCallbackType(type)
 
 		AddEventHandler('__cfx_nui:' .. type, function(body, resultCallback)
---[[
-			-- Lua 5.4: Create a to-be-closed variable to monitor the NUI callback handle.
-			local hasCallback = false
-			local _ <close> = defer(function()
-				if not hasCallback then
-					local di = debug_getinfo(callback, 'S')
-					local name = ('function %s[%d..%d]'):format(di.short_src, di.linedefined, di.lastlinedefined)
-					Citizen.Trace(("No NUI callback captured: %s\n"):format(name))
-				end
-			end)
-
-			local status, err = pcall(function()
-				callback(body, function(...)
-					hasCallback = true
-					resultCallback(...)
-				end)
-			end)
---]]			
-			local status, err = pcall(function()
-				callback(body, resultCallback)
-			end)
+			local status, err = cbHandler(callback, body, resultCallback)
 
 			if err then
 				Citizen.Trace("error during NUI callback " .. type .. ": " .. tostring(err) .. "\n")
@@ -968,7 +1009,8 @@ local function GetEntityStateBagId(entityGuid)
 	end
 end
 
-local entityTM = {
+local entityMT
+entityMT = {
 	__index = function(t, s)
 		if s == 'state' then
 			local es = GetEntityStateBagId(t.__data)
@@ -984,7 +1026,7 @@ local entityTM = {
 	end,
 	
 	__newindex = function()
-		error('Not allowed at this time.')
+		error('Setting values on Entity is not supported at this time.', 2)
 	end,
 	
 	__ext = EXT_ENTITY,
@@ -998,13 +1040,14 @@ local entityTM = {
 		
 		return setmetatable({
 			__data = ref
-		}, entityTM)
+		}, entityMT)
 	end
 }
 
-msgpack.extend(entityTM)
+msgpack.extend(entityMT)
 
-local playerTM = {
+local playerMT
+playerMT = {
 	__index = function(t, s)
 		if s == 'state' then
 			local pid = t.__data
@@ -1022,7 +1065,7 @@ local playerTM = {
 	end,
 	
 	__newindex = function()
-		error('Not allowed at this time.')
+		error('Setting values on Player is not supported at this time.', 2)
 	end,
 	
 	__ext = EXT_PLAYER,
@@ -1036,17 +1079,17 @@ local playerTM = {
 		
 		return setmetatable({
 			__data = ref
-		}, playerTM)
+		}, playerMT)
 	end
 }
 
-msgpack.extend(playerTM)
+msgpack.extend(playerMT)
 
 function Entity(ent)
 	if type(ent) == 'number' then
 		return setmetatable({
 			__data = ent
-		}, entityTM)
+		}, entityMT)
 	end
 	
 	return ent
@@ -1056,7 +1099,7 @@ function Player(ent)
 	if type(ent) == 'number' or type(ent) == 'string' then
 		return setmetatable({
 			__data = tonumber(ent)
-		}, playerTM)
+		}, playerMT)
 	end
 	
 	return ent

@@ -159,8 +159,17 @@ const EXT_LOCALFUNCREF = 11;
 							if (cb != null)
 								cb([v], null);
 						}).catch(err => {
-							if (cb != null)
-								cb(null, err.message)
+							if (cb != null) {
+								let msg = '';
+								if (err) {
+									if (err.message) {
+										msg = err.message.toString();
+									} else {
+										msg = err.toString();
+									}
+								}
+								cb(null, msg);
+							}
 						});
 					}}]);
 				}
@@ -377,7 +386,7 @@ const EXT_LOCALFUNCREF = 11;
 		const stackBlob = global.msgpack_pack(prepareStackTrace(e, parseStack(e.stack)));
 		const fst = global.FormatStackTrace(stackBlob, stackBlob.length);
 
-		if (fst) {
+		if (fst !== null && fst !== undefined) {
 			return '^1SCRIPT ERROR in ' + where + ': ' + e.toString() + "^7\n" + fst;
 		}
 
@@ -399,7 +408,7 @@ const EXT_LOCALFUNCREF = 11;
 
 	function processErrorQueue() {
 		for (const error of errorQueue) {
-			console.log(getError('promise (unhandled)', error.error));
+			console.log(getError('promise (unhandled rejection)', error.error));
 		}
 
 		errorQueue = [];
@@ -594,7 +603,8 @@ const EXT_LOCALFUNCREF = 11;
 
 			set(_, k, v) {
 				const payload = msgpack_pack(v);
-				return SetStateBagValue(es, k, payload, payload.length, isDuplicityVersion);
+				SetStateBagValue(es, k, payload, payload.length, isDuplicityVersion);
+				return true; // If the set() method returns false, and the assignment happened in strict-mode code, a TypeError will be thrown.
 			},
 		});
 	};
